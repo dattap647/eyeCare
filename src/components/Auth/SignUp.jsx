@@ -61,7 +61,7 @@ const Signup = () => {
       .required("Required"),
     doctorLicenceNumber: Yup.number()
       .typeError("Enter Valid Licence Number")
-      .required(),
+      .required("Required"),
 
     termsAndConditions: Yup.string().oneOf(
       ["true"],

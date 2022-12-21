@@ -17,11 +17,13 @@ import * as Yup from "yup";
 
 import React, { useState } from "react";
 import axios from "axios";
+import { red } from "@mui/material/colors";
 
 function SignIn() {
   const initialValues = {
     email: "",
     password: "",
+    showPassword: false,
   };
 
   const [values, setValues] = useState(initialValues);
@@ -30,47 +32,47 @@ function SignIn() {
   const [loading, setLoading] = useState(false);
   // const history = useHistory();
   const handleSubmit = async (values, props) => {
-    const { email, password } = values;
+    const { email, password, isVisible } = values;
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
     //change the url accordinglyy
-    axios
-      .post("http://localhost:8080/api/login", { email, password })
-      .then((response) => {
-        if (response.data.success) {
-          setError("");
-          setLoading(true);
-          console.log(response.data);
-          //  localStorage.setItem('jwt', response.data.token);
-          // redirect to home/dashboard page
-          // history.push("/dashboard");
-        }
-      })
-      .catch((error) => {
-        setError("Failed to Sign In Enter the Correct Credential ");
-      });
+    // // axios
+    // //   .post("http://localhost:8080/api/login", { email, password })
+    // //   .then((response) => {
+    // //     if (response.data.success) {
+    // //       setError("");
+    // //       setLoading(true);
+    // //       console.log(response.data);
+    // //       //  localStorage.setItem('jwt', response.data.token);
+    // //       // redirect to home/dashboard page
+    // //       // history.push("/dashboard");
+    // //     }
+    // //   })
+    //   .catch((error) => {
+    //     setError("Failed to Sign In Enter the Correct Credential ");
+    //   });
 
     setLoading(false);
   };
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-    setValues(...values);
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
   };
 
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Please enter a valid email")
       .required("Required"),
     password: Yup.string().required("Required"),
   });
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   //Css for the components
   const paperStyle = {
     padding: 20,
@@ -94,14 +96,12 @@ function SignIn() {
             <LockOutlined />
           </Avatar>
           <h2>Sign In</h2>
-        </Grid>
-
+        </Grid>{" "}
         {error && (
           <Alert severity="error" sx={{ my: 1, width: "100%" }}>
             {error}
           </Alert>
         )}
-        <FormControlLabel />
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -112,13 +112,15 @@ function SignIn() {
               <Field
                 as={TextField}
                 variant="outlined"
+                color="success"
                 required
+                style={textfieldStyle}
                 fullWidth
                 id="email"
                 label="Email Address"
-                placeholder="Enter the Username"
+                placeholder="Enter Email"
                 name="email"
-                style={textfieldStyle}
+                autoComplete="email"
                 autoFocus
                 helperText={<ErrorMessage name="email" />}
               />
@@ -128,12 +130,14 @@ function SignIn() {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                color="success"
                 style={textfieldStyle}
+                name="password"
                 label="Password"
                 placeholder="Enter Password"
                 id="password"
-                type={showPassword ? "text" : "password"}
+                type={values.showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 helperText={<ErrorMessage name="password" />}
                 InputProps={{
                   endAdornment: (
@@ -157,23 +161,24 @@ function SignIn() {
 
               <Button
                 type="submit"
-                fullWidth
-                variant="contained"
                 style={btnstyle}
+                variant="contained"
                 disabled={loading}
                 // disabled={props.isSubmitting}
               >
                 {loading ? "Loading..." : "Sign In"}
               </Button>
-              <Typography>
-                <Link href="#">Forgot Your Credentials?</Link>
-              </Typography>
-              <Typography>
-                Don't Have An Account? <Link href="#">Sign Up</Link>
-              </Typography>
             </Form>
           )}
         </Formik>
+        <Typography>
+          <Link style={{ color: red }} href="#">
+            Forgot Your Credentials?
+          </Link>
+        </Typography>
+        <Typography>
+          Don't Have An Account? <Link href="#">Sign Up</Link>
+        </Typography>
       </Paper>
     </Grid>
   );
