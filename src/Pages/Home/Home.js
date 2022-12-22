@@ -1,4 +1,4 @@
-import { CssBaseline, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import SignIn from "../../components/Auth/SignIn";
 
@@ -11,10 +11,6 @@ function Home() {
             <SignIn />
           </Grid>
         </Grid>
-
-        {/* <Box mt={6}>
-                    <Copyright />
-                </Box>        */}
       </div>
     </>
   );

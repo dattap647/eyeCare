@@ -4,7 +4,6 @@ import {
   Alert,
   Avatar,
   Button,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
@@ -18,8 +17,10 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import axios from "axios";
 import { red } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -32,11 +33,16 @@ function SignIn() {
   const [loading, setLoading] = useState(false);
   // const history = useHistory();
   const handleSubmit = async (values, props) => {
-    const { email, password, isVisible } = values;
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 2000);
+    // const { email, password, isVisible } = values;
+    if (true) {
+      setLoading(true);
+      navigate("/dashboard");
+    }
+
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 2000);
     //change the url accordinglyy
     // // axios
     // //   .post("http://localhost:8080/api/login", { email, password })
@@ -172,12 +178,12 @@ function SignIn() {
           )}
         </Formik>
         <Typography>
-          <Link style={{ color: red }} href="#">
+          <Link style={{ color: red }} href="/forgotpassword">
             Forgot Your Credentials?
           </Link>
         </Typography>
         <Typography>
-          Don't Have An Account? <Link href="#">Sign Up</Link>
+          Don't Have An Account? <Link href="/Signup">Sign Up</Link>
         </Typography>
       </Paper>
     </Grid>

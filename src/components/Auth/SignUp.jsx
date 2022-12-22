@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -13,7 +14,6 @@ import {
   FormLabel,
   Button,
   FormHelperText,
-  MenuItem,
   InputAdornment,
   IconButton,
 } from "@mui/material";
@@ -27,6 +27,7 @@ import {
 } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 const Signup = () => {
+  const navigate = useNavigate();
   const initialValues = {
     Firstname: "",
     Lastname: "",
@@ -40,7 +41,7 @@ const Signup = () => {
     doctorLicenceNumber: "",
     termsAndConditions: false,
   };
-  const [isAdmin, setAdmin] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -50,6 +51,10 @@ const Signup = () => {
     gender: Yup.string()
       .oneOf(["male", "female"], "Required")
       .required("Required"),
+
+    designation: Yup.string().required("required"),
+    doctorLicenceNumber: Yup.number().required("Required"),
+    address: Yup.string().required("required"),
     phoneNumber: Yup.number()
       .typeError("Enter valid Phone Number")
       .required("Required"),
@@ -58,9 +63,6 @@ const Signup = () => {
       .required("Required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Password not matched")
-      .required("Required"),
-    doctorLicenceNumber: Yup.number()
-      .typeError("Enter Valid Licence Number")
       .required("Required"),
 
     termsAndConditions: Yup.string().oneOf(
@@ -71,17 +73,18 @@ const Signup = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  const handleChange = (event) => {
-    setAdmin(!isAdmin);
-    console.log(isAdmin);
-  };
+
   const onSubmit = (values, props) => {
-    console.log(values);
-    console.log(props);
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
-    }, 2000);
+    navigate("/signin");
+    // console.log(values);
+    // console.log(props);
+
+    // props.setSubmitting(false);
+    // setTimeout(() => {
+    //   props.resetForm();
+    //   props.setSubmitting(false);
+    // }, 2000);
+    //Perform authenctication
   };
 
   const paperStyle = { padding: 20, width: 600, margin: "20px auto" };
@@ -184,29 +187,42 @@ const Signup = () => {
                   <ErrorMessage name="gender" />
                 </FormHelperText>
 
-                <TextField
+                <Field
+                  as={TextField}
+                  fullWidth
+                  name="designation"
                   label="Designation"
-                  select
-                  onChange={handleChange}
+                  color="success"
+                  style={{ marginTop: 16 }}
+                  placeholder="Enter your Designation"
+                  helperText={<ErrorMessage name="designation" />}
+                />
+                {/* <TextField
+                  name="designation"
+                  label="Designation"
                   size="medium"
+                  select
                   color="success"
                   style={{ width: "250px", marginLeft: 60, marginTop: 16 }}
+                  helperText={<ErrorMessage name="designation" />}
                 >
-                  <MenuItem value="doctor">Doctor</MenuItem>
-                  <MenuItem value="user">User</MenuItem>
-                </TextField>
+                  <MenuItem value="doctor" label="doctor">
+                    Doctor
+                  </MenuItem>
+                  <MenuItem value="user" label="user">
+                    User
+                  </MenuItem>
+                </TextField> */}
               </Stack>
-
               <Field
                 as={TextField}
-                z
                 fullWidth
                 name="doctorLicenceNumber:"
                 label="Doctor Licence Number:"
                 color="success"
                 style={{ marginTop: 16 }}
                 placeholder="Enter Licence Number"
-                helperText={<ErrorMessage name="phoneNumber" />}
+                helperText={<ErrorMessage name="doctorLicenceNumber" />}
               />
 
               <Field
@@ -292,6 +308,9 @@ const Signup = () => {
             </Form>
           )}
         </Formik>
+        <Typography>
+          Have An Account? <Link to="/signin">Sign In</Link>
+        </Typography>
       </Paper>
     </Grid>
   );
