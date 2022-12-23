@@ -28,6 +28,8 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ConfirmDialog from "../confirmDialog/ConfirmDialog";
+import Notification from "../Notification/Notification";
+import { secondaryListItems } from "./ListItem";
 
 function Copyright(props) {
   return (
@@ -46,12 +48,16 @@ function Copyright(props) {
   );
 }
 
-function DashboardContent() {
+function DashboardContent({ title, children }) {
   const [openDrawer, setOpen] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   // const [openPopup, setOpenPopup]= useState(false);
-  // const [notify, setNotify]=useState({isOpen: false, message: '', type:''});
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: "",
@@ -82,17 +88,17 @@ function DashboardContent() {
     }
   };
 
-  // const handleClickNotification = () => {
-  //   /* setNotify({
-  //     isOpen: true,
-  //     message: 'Notifications coming soon! 😃',
-  //     type: 'info'
-  //   }); */
-  //   setOpenPopup(true);
-  //   setTimeout(function () {
-  //     setOpenPopup(false);
-  //   }, 3000);
-  // }
+  const handleClickNotification = () => {
+    setNotify({
+      isOpen: true,
+      message: "Notifications coming soon! 😃",
+      type: "info",
+    });
+    //   setOpenPopup(true);
+    //   setTimeout(function () {
+    //     setOpenPopup(false);
+    //   }, 3000);
+  };
 
   return (
     <>
@@ -124,10 +130,10 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Admin
+              {title}
             </Typography>
 
-            <IconButton>
+            <IconButton onClick={handleClickNotification}>
               <Badge badgeContent={1} color="secondary">
                 <Notifications />
               </Badge>
@@ -150,7 +156,7 @@ function DashboardContent() {
           <Divider />
           <List>List</List>
           <Divider />
-          <List> SecondList</List>
+          <List> {secondaryListItems}</List>
 
           <List sx={{ mt: "auto" }}>
             <Tooltip title="Account">
@@ -194,22 +200,18 @@ function DashboardContent() {
                   {error}
                 </Alert>
               )}
-              <center>
-                Component will be Here
-                <Grid container spacing={3}>
-                  <Grid item xs={6}></Grid>
-                </Grid>
-              </center>
+              {children}
             </Grid>
-            <Copyright sx={{ pt: 4, mt: 50 }} />
+            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
       <ConfirmDialog confirmDialog={confirmDialog} />
+      <Notification notify={notify} setNotify={setNotify} />
     </>
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
+export default function Dashboard({ title, children }) {
+  return <DashboardContent title={title} children={children} />;
 }

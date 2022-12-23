@@ -36,7 +36,7 @@ function SignIn() {
     // const { email, password, isVisible } = values;
     if (true) {
       setLoading(true);
-      navigate("/dashboard");
+      navigate("/patient");
     }
 
     // setTimeout(() => {
@@ -87,7 +87,7 @@ function SignIn() {
     margin: "20px auto",
   };
   const textfieldStyle = {
-    bordercolor: "#56c595",
+    borderColor: "#56c595",
     margin: "6px 0",
     color: "#56c595",
   };
