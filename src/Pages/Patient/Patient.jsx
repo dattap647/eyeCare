@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import PatientAppointment from "./PatientAppointment";
 import PatientDashboard from "./PatientDashboard";
+import { mainListItems } from "./PatientListItem";
 
 function Patient() {
   return (
@@ -14,6 +15,7 @@ function Patient() {
           <Dashboard
             title="Patient Dashboard"
             children={<PatientDashboard />}
+            mainListItems={mainListItems}
           />
         }
       />

@@ -24,6 +24,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { Stack } from "@mui/system";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -48,7 +49,7 @@ function Copyright(props) {
   );
 }
 
-function DashboardContent({ title, children }) {
+function DashboardContent({ title, children, mainListItems }) {
   const [openDrawer, setOpen] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -88,6 +89,9 @@ function DashboardContent({ title, children }) {
     }
   };
 
+  const handleProfile = () => {
+    navigate("/");
+  };
   const handleClickNotification = () => {
     setNotify({
       isOpen: true,
@@ -141,33 +145,44 @@ function DashboardContent({ title, children }) {
           </Toolbar>
         </AppBar>
         <Drawer open={openDrawer} onClose={toggleDrawer} style={{ width: 400 }}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeft />
-            </IconButton>
-          </Toolbar>
+          <Stack direction="row">
+            {" "}
+            <Typography
+              variant="h4"
+              color="text.success"
+              align="center"
+              margin={1}
+            >
+              Eye Care
+            </Typography>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                px: [1],
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeft />
+              </IconButton>
+            </Toolbar>
+          </Stack>
           <Divider />
-          <List>List</List>
+          <List>{mainListItems}</List>
           <Divider />
           <List> {secondaryListItems}</List>
 
           <List sx={{ mt: "auto" }}>
             <Tooltip title="Account">
-              <ListItem>
+              <ListItem button onClick={handleProfile}>
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
                 {/* <ListItemText
                 primary={currentUser.displayName || currentUser.email}
               /> */}
-                <ListItemText primary="UserName" />
+                <ListItemText primary="Username" />
               </ListItem>
             </Tooltip>
           </List>
@@ -212,6 +227,12 @@ function DashboardContent({ title, children }) {
   );
 }
 
-export default function Dashboard({ title, children }) {
-  return <DashboardContent title={title} children={children} />;
+export default function Dashboard({ title, children, mainListItems }) {
+  return (
+    <DashboardContent
+      title={title}
+      children={children}
+      mainListItems={mainListItems}
+    />
+  );
 }

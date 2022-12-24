@@ -99,7 +99,7 @@ function PatientDashboard() {
                 <Button
                   variant="contained"
                   component={Link}
-                  to=""
+                  to="/patient/history"
                   color="success"
                 >
                   View History
@@ -128,7 +128,7 @@ function PatientDashboard() {
                 <Button
                   variant="contained"
                   component={Link}
-                  to=""
+                  to="/patient/reports"
                   color="success"
                 >
                   Prescriptions

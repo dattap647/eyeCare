@@ -7,7 +7,10 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import { Patient } from "./Pages";
 import Home from "./Pages/Home/Home";
 import PatientAppointment from "./Pages/Patient/PatientAppointment";
+import PatientAppointmentHistory from "./Pages/Patient/PatientAppointmentHistory";
 import PatientDashboard from "./Pages/Patient/PatientDashboard";
+import { mainListItems } from "./Pages/Patient/PatientListItem";
+import PatientReport from "./Pages/Patient/PatientReport";
 
 function App() {
   return (
@@ -25,6 +28,7 @@ function App() {
             <Dashboard
               title="Patient Dashboard"
               children={<PatientDashboard />}
+              mainListItems={mainListItems}
             />
           }
         />
@@ -34,6 +38,27 @@ function App() {
             <Dashboard
               title="Patient Dashboard"
               children={<PatientAppointment />}
+              mainListItems={mainListItems}
+            />
+          }
+        />
+        <Route
+          path="/patient/reports"
+          element={
+            <Dashboard
+              title="Patient Dashboard"
+              children={<PatientReport />}
+              mainListItems={mainListItems}
+            />
+          }
+        />
+        <Route
+          path="/patient/history"
+          element={
+            <Dashboard
+              title="Patient Dashboard"
+              children={<PatientAppointmentHistory />}
+              mainListItems={mainListItems}
             />
           }
         />
