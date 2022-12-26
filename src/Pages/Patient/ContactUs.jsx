@@ -37,8 +37,8 @@ function ContactusDialog(props) {
   const classes = useStyles();
   return (
     <Dialog open={opendialog} classes={{ paper: classes.dialog }}>
-      <DialogTitle className={classes.dialogTitle}></DialogTitle>
-      <DialogContent className={classes.DialogContent}>
+      <DialogTitle></DialogTitle>
+      <DialogContent>
         <Typography variant="h6" align="center" gutterBottom>
           Contact Us
         </Typography>

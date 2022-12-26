@@ -1,9 +1,9 @@
 import {
-  ConnectWithoutContactOutlined,
-  ContactPageRounded,
-  HistoryEduRounded,
+  Assignment,
   LocalHospitalRounded,
+  MedicationOutlined,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -13,164 +13,153 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import ContactusDialog from "./ContactUs.jsx";
-import "./style.js";
-import usestyle from "./style";
+import React from "react";
+import useStyle from "./style";
 
-function PatientDashboard() {
-  const [confirmDialog, setConfirmDialog] = useState(false);
-
-  const useStyle = usestyle();
-
-  const handleDialog = () => {
-    console.log(confirmDialog);
-    setConfirmDialog(!confirmDialog);
-  };
+function DoctorDashboard() {
+  const usestyle = useStyle();
   return (
     <React.Fragment>
-      <Container style={useStyle.container} maxWidth="m">
+      <Container style={usestyle.container} sx={{ py: 4 }} maxWidth="m">
         <Grid container spacing={3}>
           <Grid item lg={12} md={12} sm={12}>
             <Typography
-              component="h1"
               variant="h4"
-              color="success"
+              color="primary"
               gutterBottom
-              align="center"
+              style={usestyle.cardTitle}
             >
-              Welcome Username
+              Welcome Doctorname
             </Typography>
           </Grid>
-
-          {/* Card for Basic Patient Feature */}
           <Grid item xs={12} sm={6} md={6} lg={4}>
-            <Card style={useStyle.card}>
+            <Card style={usestyle.card}>
               <CardContent>
-                <Card style={useStyle.cardIcon}>
+                <Card style={usestyle.cardIcon}>
                   <LocalHospitalRounded />
                 </Card>
-                <div style={useStyle.cardContent}>
-                  <Typography style={useStyle.cardTitle}>
-                    Appointment
+                <div style={usestyle.cardContent}>
+                  <Typography style={usestyle.cardTitle} variant="h5">
+                    Appointments
                   </Typography>
                   <Typography
                     variant="subtitle2"
                     color="text.secondary"
                     textAlign="center"
                   >
-                    Request to see a Doctor
+                    View Pending Appointments
                   </Typography>
                 </div>
               </CardContent>
-              <CardActions style={useStyle.cardActions} align="center">
+              <CardActions style={usestyle.cardActions}>
                 <Button
                   variant="contained"
                   component={Link}
-                  to="/patient/appointment"
-                  style={useStyle.btnstyle}
+                  style={usestyle.btnstyle}
+                  to="/doctor/appointment"
                 >
-                  Book Interview
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-            <Card style={useStyle.card}>
-              <CardContent>
-                <Card style={useStyle.cardIcon}>
-                  <HistoryEduRounded />
-                </Card>
-                <div style={useStyle.cardContent}>
-                  <Typography style={useStyle.cardTitle}>
-                    My Appointments
-                  </Typography>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    textAlign="center"
-                  >
-                    View Appointment History.
-                  </Typography>
-                </div>
-              </CardContent>
-              <CardActions style={useStyle.cardActions} align="center">
-                <Button
-                  variant="contained"
-                  component={Link}
-                  to="/patient/history"
-                  style={useStyle.btnstyle}
-                >
-                  View History
+                  Appointment List
                 </Button>
               </CardActions>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={4}>
-            <Card style={useStyle.card}>
+            <Card classes={usestyle.card}>
               <CardContent>
-                <Card style={useStyle.cardIcon}>
-                  <ContactPageRounded />
+                <Card style={usestyle.cardIcon}>
+                  <MedicationOutlined />
                 </Card>
-                <div style={useStyle.cardContent}>
-                  <Typography style={useStyle.cardTitle}>Reports</Typography>
+                <div style={usestyle.cardContent}>
+                  <Typography style={usestyle.cardTitle} variant="h5">
+                    Prescriptions
+                  </Typography>
                   <Typography
                     variant="subtitle2"
                     color="text.secondary"
                     textAlign="center"
                   >
-                    View Diagonasis and Analysis Report
+                    View All Prescription
                   </Typography>
                 </div>
               </CardContent>
-              <CardActions style={useStyle.cardActions} align="center">
+              <CardActions style={usestyle.cardActions}>
                 <Button
                   variant="contained"
                   component={Link}
-                  to="/patient/reports"
-                  style={useStyle.btnstyle}
+                  style={usestyle.btnstyle}
+                  to="/doctor/prescription"
                 >
-                  Prescriptions
+                  Prescription
                 </Button>
               </CardActions>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={4}>
-            <Card style={useStyle.card}>
+            <Card classes={usestyle.card}>
               <CardContent>
-                <Card style={useStyle.cardIcon}>
-                  <ConnectWithoutContactOutlined />
+                <Card style={usestyle.cardIcon}>
+                  <LocalHospitalRounded />
                 </Card>
-                <div style={useStyle.cardContent}>
-                  <Typography style={useStyle.cardTitle}>Contact Us</Typography>
+                <div style={usestyle.cardContent}>
+                  <Typography style={usestyle.cardTitle} variant="h5">
+                    Records
+                  </Typography>
                   <Typography
                     variant="subtitle2"
                     color="text.secondary"
                     textAlign="center"
                   >
-                    Need Help?
+                    View Appointment Records
                   </Typography>
                 </div>
               </CardContent>
-              <CardActions style={useStyle.cardActions} align="center">
+              <CardActions style={usestyle.cardActions}>
                 <Button
                   variant="contained"
                   component={Link}
-                  onClick={handleDialog}
-                  style={useStyle.btnstyle}
+                  style={usestyle.btnstyle}
+                  to="/doctor/records"
                 >
-                  Contact
+                  View List
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4}>
+            <Card classes={usestyle.card}>
+              <CardContent>
+                <Card style={usestyle.cardIcon}>
+                  <Assignment />
+                </Card>
+                <div style={usestyle.cardContent}>
+                  <Typography style={usestyle.cardTitle} variant="h5">
+                    Edit Form
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    textAlign="center"
+                  >
+                    Edit Patient Form
+                  </Typography>
+                </div>
+              </CardContent>
+              <CardActions style={usestyle.cardActions}>
+                <Button
+                  variant="contained"
+                  component={Link}
+                  style={usestyle.btnstyle}
+                  to="/doctor/edit-form"
+                >
+                  Edit
                 </Button>
               </CardActions>
             </Card>
           </Grid>
         </Grid>
       </Container>
-      <ContactusDialog opendialog={confirmDialog} setopen={setConfirmDialog} />
     </React.Fragment>
   );
 }
 
-export default PatientDashboard;
+export default DoctorDashboard;

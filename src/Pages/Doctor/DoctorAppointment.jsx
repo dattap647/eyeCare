@@ -4,7 +4,7 @@ import React from "react";
 
 import usestyle from "./style";
 
-function PatientReport() {
+function DoctorAppointment() {
   const useStyle = usestyle();
   return (
     <>
@@ -17,10 +17,10 @@ function PatientReport() {
               color="primary"
               style={useStyle.cardTitle}
             >
-              Reports
+              Appointments
             </Typography>
 
-            <Paper style={useStyle.paperContent}> No Record Found</Paper>
+            <Paper style={useStyle.paperContent}> No Record Found!</Paper>
           </Grid>
         </Grid>
       </Container>
@@ -28,4 +28,4 @@ function PatientReport() {
   );
 }
 
-export default PatientReport;
+export default DoctorAppointment;

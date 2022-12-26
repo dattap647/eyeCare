@@ -11,7 +11,7 @@ function PatientForm() {
   };
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const status = "active";
+  // const status = "active";
   const [message, setMessage] = useState("");
 
   const validationSchema = Yup.object().shape({

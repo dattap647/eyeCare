@@ -1,9 +1,12 @@
 import React from "react";
+
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import PatientAppointment from "./PatientAppointment";
+import PatientAppointmentHistory from "./PatientAppointmentHistory";
 import PatientDashboard from "./PatientDashboard";
 import { mainListItems } from "./PatientListItem";
+import PatientReport from "./PatientReport";
 
 function Patient() {
   return (
@@ -20,30 +23,46 @@ function Patient() {
         }
       />
       <Route
-        path="/patient/dashboard"
+        path="/dashboard"
         element={
           <Dashboard
             title="Patient Dashboard"
             children={<PatientDashboard />}
+            mainListItems={mainListItems}
           />
         }
       />
       <Route
-        path="/patient/appointment"
+        path="/appointment"
         element={
           <Dashboard
             title="Patient Dashboard"
             children={<PatientAppointment />}
+            mainListItems={mainListItems}
           />
         }
       />
-
-      {/* <Route path="/patient/appointment-history" /> */}
-
-      {/* <Route path="/patient/reports"/> */}
-
-      {/* <Route path="/patient/contact-us" e/>
-       */}
+      <Route
+        path="/reports"
+        element={
+          <Dashboard
+            title="Patient Dashboard"
+            children={<PatientReport />}
+            mainListItems={mainListItems}
+          />
+        }
+      />
+      <Route
+        path="/history"
+        element={
+          <Dashboard
+            title="Patient Dashboard"
+            children={<PatientAppointmentHistory />}
+            mainListItems={mainListItems}
+          />
+        }
+      />
+      <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
   );
 }

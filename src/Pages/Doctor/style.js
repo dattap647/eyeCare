@@ -1,15 +1,16 @@
 const usestyle = () => ({
+  root: {
+    "& .MuiFormControl-root": {
+      width: "80%",
+      margin: 1,
+    },
+  },
   container: {
     display: "flex",
     flexDirection: "column",
   },
-
   card: {
     minWidth: "275px",
-  },
-  cardTitle: {
-    textAlign: "center",
-    padding: "2px 0",
   },
   cardIcon: {
     display: "flex",
@@ -20,16 +21,15 @@ const usestyle = () => ({
     color: "#000",
     // color:'#3c44b1',
   },
+  cardTitle: {
+    textAlign: "center",
+    padding: (2, 0),
+  },
   cardContent: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-  },
-
-  paperContent: {
-    margin: (5, 0),
-    padding: 3,
   },
   cardActions: {
     flex: "center",
@@ -37,12 +37,16 @@ const usestyle = () => ({
     justifyContent: "center",
     margin: "1rem 0",
   },
+  paperContent: {
+    margin: (5, 0),
+    padding: 3,
+  },
   table: {
     marginTop: 3,
     "& thead th": {
       fontWeight: "600",
-      color: "#5ce",
-      backgroundColor: "#fffbf2",
+      color: "green",
+      backgroundColor: "red",
     },
     "& tbody td": {
       fontWeight: "300",
@@ -52,8 +56,10 @@ const usestyle = () => ({
       // cursor: 'pointer'
     },
   },
-  succes: {
+  success: {
     backgroundColor: "#4caf50",
+    color: "#fff",
+    textTransform: "capitalize",
   },
   btnstyle: { backgroundColor: "#56c596", margin: "8px 0", color: "white" },
 });

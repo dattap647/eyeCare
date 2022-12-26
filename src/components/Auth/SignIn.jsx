@@ -33,10 +33,11 @@ function SignIn() {
   const [loading, setLoading] = useState(false);
   // const history = useHistory();
   const handleSubmit = async (values, props) => {
-    // const { email, password, isVisible } = values;
+    const { email, password, isVisible } = values;
     if (true) {
       setLoading(true);
-      navigate("/patient");
+      //conditional user rendering
+      password == "doctor123" ? navigate("/doctor") : navigate("/patient");
     }
 
     // setTimeout(() => {

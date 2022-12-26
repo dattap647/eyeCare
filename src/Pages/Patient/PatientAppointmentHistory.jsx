@@ -11,7 +11,12 @@ function PatientAppointmentHistory() {
       <Container style={useStyle.container} sx={{ py: 4 }} maxWidth="m">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Typography component="h1" variant="h4" color="primary">
+            <Typography
+              component="h1"
+              variant="h4"
+              color="primary"
+              style={useStyle.cardTitle}
+            >
               My Appointments
             </Typography>
 

@@ -1,4 +1,5 @@
 import {
+  Assignment,
   ContactPageRounded,
   Dashboard,
   EventAvailable,
@@ -10,7 +11,7 @@ import { Link } from "react-router-dom";
 export const mainListItems = (
   <div>
     <Tooltip title="Dashboard">
-      <ListItem button component={Link} to="/patient/dashboard">
+      <ListItem button component={Link} to="/doctor/dashboard">
         <ListItemIcon>
           <Dashboard />
         </ListItemIcon>
@@ -18,39 +19,38 @@ export const mainListItems = (
       </ListItem>
     </Tooltip>
 
-    <Tooltip title="My Appointment">
-      <ListItem button component={Link} to="/patient/appointment">
+    <Tooltip title=" Appointment">
+      <ListItem button component={Link} to="/doctor/appointment">
         <ListItemIcon>
           <EventAvailable />
         </ListItemIcon>
-        <ListItemText primary="Book Appointment" />
+        <ListItemText primary="Appointment" />
       </ListItem>
     </Tooltip>
 
-    <Tooltip title="Reports">
-      <ListItem button component={Link} to="/patient/reports">
+    <Tooltip title="Prescription">
+      <ListItem button component={Link} to="/doctor/prescription">
         <ListItemIcon>
           <ContactPageRounded />
         </ListItemIcon>
-        <ListItemText primary="Reports" />
+        <ListItemText primary="Prescription" />
       </ListItem>
     </Tooltip>
-    <Tooltip title="History">
-      <ListItem button component={Link} to="/patient/history">
+    <Tooltip title="Records">
+      <ListItem button component={Link} to="/doctor/records">
         <ListItemIcon>
           <HistoryEduRounded />
         </ListItemIcon>
-        <ListItemText primary="My Appointment" />
+        <ListItemText primary="Records" />
       </ListItem>
     </Tooltip>
-
-    {/* <Tooltip title="Prescriptions">
-      <ListItem button component={Link} to="/patient/prescriptions">
+    <Tooltip title="Form">
+      <ListItem button component={Link} to="/doctor/edit-form">
         <ListItemIcon>
-          <GiIcons.GiPill className="reactIcon" />
+          <Assignment />
         </ListItemIcon>
-        <ListItemText primary="Prescriptions" />
+        <ListItemText primary="Edit Form" />
       </ListItem>
-    </Tooltip> */}
+    </Tooltip>
   </div>
 );
