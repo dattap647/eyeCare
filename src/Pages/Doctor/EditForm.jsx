@@ -23,6 +23,7 @@ function EditForm() {
               <Snackbar
                 style={classes.root}
                 open={true}
+                autoHideDuration={1500}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
               >
                 <Alert>Form Comming Soon</Alert>

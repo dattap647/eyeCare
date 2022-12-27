@@ -7,6 +7,7 @@ import DoctorAppointment from "./DoctorAppointment";
 import { mainListItems } from "./DoctorItemList";
 import DoctorAppointmentRecords from "./DoctorAppointmentRecords";
 import EditForm from "./EditForm";
+import PageNotFound from "../404/404";
 
 function Doctors() {
   return (
@@ -72,7 +73,7 @@ function Doctors() {
           />
         }
       />
-      <Route path="*" element={<p>There's nothing here: 404!</p>} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

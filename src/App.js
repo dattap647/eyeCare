@@ -4,6 +4,7 @@ import SignIn from "./components/Auth/SignIn";
 import Signup from "./components/Auth/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import PageNotFound from "./Pages/404/404";
 
 import Home from "./Pages/Home/Home";
 import PrivateDoctorRoute from "./Routes/Doctors/DoctorRoutes";
@@ -21,7 +22,7 @@ function App() {
         <Route path="/patient/*" element={<PrivatePatientRoute />} />
         <Route path="/doctor/*" element={<PrivateDoctorRoute />} />
 
-        <Route path="*" element={<p>There's nothing here: 404!</p>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

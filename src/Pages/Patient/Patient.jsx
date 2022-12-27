@@ -2,6 +2,7 @@ import React from "react";
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import PageNotFound from "../404/404";
 import PatientAppointment from "./PatientAppointment";
 import PatientAppointmentHistory from "./PatientAppointmentHistory";
 import PatientDashboard from "./PatientDashboard";
@@ -62,7 +63,7 @@ function Patient() {
           />
         }
       />
-      <Route path="*" element={<p>There's nothing here: 404!</p>} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
