@@ -4,7 +4,6 @@ import SignIn from "./components/Auth/SignIn";
 import Signup from "./components/Auth/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import NavBar from "./components/Navbar/NavBar";
 
 import PageNotFound from "./Pages/404/404";
 
@@ -15,8 +14,7 @@ import PrivatePatientRoute from "./Routes/Patients/PatientRoute";
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      {/* <Routes>
+      <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
@@ -26,7 +24,7 @@ function App() {
         <Route path="/doctor/*" element={<PrivateDoctorRoute />} />
 
         <Route path="*" element={<PageNotFound />} />
-      </Routes> */}
+      </Routes>
     </div>
   );
 }

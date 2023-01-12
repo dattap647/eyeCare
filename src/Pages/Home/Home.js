@@ -1,17 +1,13 @@
-import { Grid } from "@mui/material";
 import React from "react";
-import SignIn from "../../components/Auth/SignIn";
+
+import Hero from "../../components/HomePage/Hero/Hero";
+import Services from "../../components/HomePage/Service/Services";
 
 function Home() {
   return (
     <>
-      <div>
-        <Grid container component="main">
-          <Grid item xs={12}>
-            <SignIn />
-          </Grid>
-        </Grid>
-      </div>
+      <Hero />
+      <Services />
     </>
   );
 }
