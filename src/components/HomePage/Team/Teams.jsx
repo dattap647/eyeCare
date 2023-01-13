@@ -1,10 +1,10 @@
 import { Box, Card, styled, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import serviceContent from "./carosoulContent";
+import doctor from "./DoctorList";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const Services = () => {
+const Teams = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
     width: "30%",
     [theme.breakpoints.down("md")]: {
@@ -29,7 +29,7 @@ const Services = () => {
 
   const ServiceBox = styled(Card)(({ theme }) => ({
     display: "flex",
-    flexDirection: "Row",
+    flexDirection: "Column",
     alignItems: "center",
 
     padding: "10px",
@@ -64,7 +64,7 @@ const Services = () => {
         variant="h3"
         sx={{ fontSize: "35px", fontWeight: "bold", color: "#5c6", my: 3 }}
       >
-        Eye Care Advantages.
+        Our Team of Doctors.
       </Typography>
 
       <CustomBox>
@@ -77,14 +77,15 @@ const Services = () => {
             textAlign: "center",
           }}
         >
-          Everything you need to know, We've been offering personalized eye care
-          to patients
+          At Eye Care Clinic Our Eye Specialist doctor have more than a decade
+          of experience in treating eye patients . Our topmost priority is the
+          comfort and well being of the patients.
         </Typography>
       </CustomBox>
 
       <Services>
         <AutoPlaySwipeableViews sx={{ alignItems: "center" }}>
-          {serviceContent.map((step, index) => (
+          {doctor.map((step, index) => (
             <ServiceBox>
               <Box
                 component="img"
@@ -96,7 +97,7 @@ const Services = () => {
                   width: "100px",
                 }}
                 src={step.imgPath}
-                alt={step.label}
+                alt={step.name}
               />
 
               <Stack>
@@ -110,14 +111,14 @@ const Services = () => {
                     my: 1,
                   }}
                 >
-                  {step.label}
+                  {step.name}
                 </Typography>
 
                 <Typography
                   variant="body2"
                   sx={{ fontSize: "14px", color: "#5A6473", my: 2 }}
                 >
-                  {step.bodyText}
+                  {step.role}
                 </Typography>
               </Stack>
             </ServiceBox>
@@ -128,4 +129,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Teams;
