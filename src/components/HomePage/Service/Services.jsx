@@ -1,7 +1,11 @@
 import { Box, Card, styled, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+
 import serviceContent from "./carosoulContent";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const Services = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
     width: "30%",
@@ -29,12 +33,12 @@ const Services = () => {
     display: "flex",
     flexDirection: "Row",
     alignItems: "center",
-    minwidth: "300px",
+
     padding: "10px",
     maxWidth: "381px",
-    margin: theme.spacing(5),
+    margin: "8px auto",
     backgroundColor: "#E6F0FF",
-    // marginTop: theme.spacing(5),
+    // marginTop: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
       margin: theme.spacing(2, 2, 2),
     },
@@ -81,52 +85,46 @@ const Services = () => {
       </CustomBox>
 
       <Services>
-        {serviceContent.map((step, index) => (
-          <ServiceBox>
-            <Box
-              component="img"
-              sx={{
-                height: "100px",
-                display: "block",
-                maxWidth: 300,
-                overflow: "hidden",
-                width: "100px",
-              }}
-              src={step.imgPath}
-              alt={step.label}
-            />
+        <AutoPlaySwipeableViews sx={{ alignItems: "center" }}>
+          {serviceContent.map((step, index) => (
+            <ServiceBox>
+              <Box
+                component="img"
+                sx={{
+                  height: "100px",
+                  display: "block",
+                  maxWidth: 300,
+                  overflow: "hidden",
+                  width: "100px",
+                }}
+                src={step.imgPath}
+                alt={step.label}
+              />
 
-            <Stack>
-              <Typography
-                variant="body2"
-                sx={{
-                  fontFamily: "bold",
-                  fontWeight: "500",
-                  fontSize: "20px",
-                  color: "#3B3c",
-                  my: 1,
-                }}
-              >
-                {step.label}
-              </Typography>
-              {/* <Box
-                sx={{
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              > */}
-              <Typography
-                variant="body2"
-                sx={{ fontSize: "14px", color: "#5A6473", my: 2 }}
-              >
-                {step.bodyText}
-              </Typography>
-              {/* </Box> */}
-            </Stack>
-          </ServiceBox>
-        ))}
+              <Stack>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "bold",
+                    fontWeight: "500",
+                    fontSize: "20px",
+                    color: "#3B3c",
+                    my: 1,
+                  }}
+                >
+                  {step.label}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: "14px", color: "#5A6473", my: 2 }}
+                >
+                  {step.bodyText}
+                </Typography>
+              </Stack>
+            </ServiceBox>
+          ))}
+        </AutoPlaySwipeableViews>
       </Services>
     </Box>
   );
