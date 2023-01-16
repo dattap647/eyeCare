@@ -3,16 +3,20 @@ import {
   Alert,
   Avatar,
   Button,
-  CssBaseline,
   Grid,
   Link,
   Paper,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
+import { Box, Stack } from "@mui/system";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
+import doctor from "../../assets/forgotpassword.jpg";
+import Footer from "../HomePage/Footer/Footer";
+import Navbar from "../HomePage/Navbar/NavBar";
 
 function ForgotPassword() {
   const initialValues = {
@@ -47,6 +51,25 @@ function ForgotPassword() {
     setLoading(false);
   };
 
+  const ImageBox = styled(Box)(({ theme }) => ({
+    flex: "1",
+    display: "block",
+
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  }));
+  const PaperContainer = styled(Paper)(({ theme }) => ({
+    padding: 20,
+    width: 350,
+    margin: "20px 10px",
+    alignItems: "left",
+    [theme.breakpoints.down("md")]: {
+      height: "450px",
+
+      margin: "20px 5px 20px 5px",
+    },
+  }));
   const paperStyle = {
     padding: 20,
     height: "80vh",
@@ -63,77 +86,85 @@ function ForgotPassword() {
   const btnstyle = { backgroundColor: "#56c596", margin: "40px 0" };
 
   return (
-    <Grid>
-      <CssBaseline />
-      <Paper elevation={10} style={paperStyle}>
-        <Grid align="center">
-          <Avatar style={avatarStyle}>
-            <LockResetRounded />
-          </Avatar>
-          <Typography variant="h4">Password Reset</Typography>
-        </Grid>
-        {error && (
-          <Alert severity="error" sx={{ my: 1, width: "100%" }}>
-            {error}
-          </Alert>
-        )}
+    <>
+      <Navbar />
+      <Grid display="inline-flex">
+        <Stack direction="row">
+          <ImageBox sx={{ flex: "1" }}>
+            <img src={doctor} alt="doctor" style={{ width: "50%" }} />
+          </ImageBox>
+          <PaperContainer elevation={10}>
+            <Grid align="center">
+              <Avatar style={avatarStyle}>
+                <LockResetRounded />
+              </Avatar>
+              <Typography variant="h4">Password Reset</Typography>
+            </Grid>
+            {error && (
+              <Alert severity="error" sx={{ my: 1, width: "100%" }}>
+                {error}
+              </Alert>
+            )}
 
-        {message && (
-          <Alert severity="info" sx={{ my: 1, width: "100%" }}>
-            {message}
-          </Alert>
-        )}
+            {message && (
+              <Alert severity="info" sx={{ my: 1, width: "100%" }}>
+                {message}
+              </Alert>
+            )}
 
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
-        >
-          {(props) => (
-            <Form autoComplete="off">
-              <Field
-                as={TextField}
-                variant="outlined"
-                required
-                color="success"
-                style={textfieldStyle}
-                id="email"
-                label="Email Address"
-                placeholder="Enter Email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                helperText={<ErrorMessage name="email" />}
-              />
+            <Formik
+              initialValues={initialValues}
+              onSubmit={handleSubmit}
+              validationSchema={validationSchema}
+            >
+              {(props) => (
+                <Form autoComplete="off">
+                  <Field
+                    as={TextField}
+                    variant="outlined"
+                    required
+                    color="success"
+                    style={textfieldStyle}
+                    id="email"
+                    label="Email Address"
+                    placeholder="Enter Email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    helperText={<ErrorMessage name="email" />}
+                  />
 
-              <Button
-                type="submit"
-                variant="contained"
-                style={btnstyle}
-                disabled={loading}
-                // disabled={props.isSubmitting}
-                onClick={() => {}}
-              >
-                {loading ? "Loading..." : "Reset Password"}
-              </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={btnstyle}
+                    disabled={loading}
+                    // disabled={props.isSubmitting}
+                    onClick={() => {}}
+                  >
+                    {loading ? "Loading..." : "Reset Password"}
+                  </Button>
 
-              <Grid container>
-                <Grid item xs={12} sm={6}>
-                  <Link href="/signin" variant="body2">
-                    {`Login instead?`}
-                  </Link>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Link href="/signup" variant="body2">
-                    {"Need Account?"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Form>
-          )}
-        </Formik>
-      </Paper>
-    </Grid>
+                  <Grid container>
+                    <Grid item xs={12} sm={6}>
+                      <Link href="/signin" variant="body2">
+                        {`Login instead?`}
+                      </Link>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Link href="/signup" variant="body2">
+                        {"Need Account?"}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Form>
+              )}
+            </Formik>
+          </PaperContainer>
+        </Stack>
+      </Grid>
+      <Footer />
+    </>
   );
 }
 

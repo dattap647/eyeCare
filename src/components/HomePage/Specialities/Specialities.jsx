@@ -4,7 +4,7 @@ import React from "react";
 import Images from "./ImageContent";
 
 const Specialities = () => {
-  const PropertiesBox = styled(Box)(({ theme }) => ({
+  const SpecialitiesBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
     marginTop: theme.spacing(5),
@@ -14,7 +14,7 @@ const Specialities = () => {
     },
   }));
 
-  const PropertiesTextBox = styled(Box)(({ theme }) => ({
+  const SpecialitiesTextBox = styled(Box)(({ theme }) => ({
     [theme.breakpoints.down("md")]: {
       textAlign: "center",
     },
@@ -24,11 +24,11 @@ const Specialities = () => {
     alignContent: "center",
   }));
 
-  const HouseBox = styled(Box)(({ theme }) => ({
+  const ImageBox = styled(Box)(({ theme }) => ({
     borderRadius: "10px",
     maxWidth: 350,
 
-    backgroundColor: "#5c6",
+    backgroundColor: "#E6F0FF",
     margin: theme.spacing(0, 2, 0, 2),
     [theme.breakpoints.down("md")]: {
       margin: theme.spacing(2, 0, 2, 0),
@@ -38,17 +38,17 @@ const Specialities = () => {
   return (
     <Box sx={{ mt: 4, backgroundColor: "#F5FAFE", py: 10 }}>
       <Container>
-        <PropertiesTextBox>
+        <SpecialitiesTextBox>
           <Typography
             sx={{ color: "#5c6", fontSize: "35px", fontWeight: "bold" }}
           >
             Our Clinical Specialities
           </Typography>
-        </PropertiesTextBox>
+        </SpecialitiesTextBox>
 
-        <PropertiesBox>
+        <SpecialitiesBox>
           {Images.map((i) => (
-            <HouseBox>
+            <ImageBox>
               <ImgContainer sx={{ my: 3 }}>
                 <img
                   src={i.imgPath}
@@ -57,16 +57,27 @@ const Specialities = () => {
                 />
               </ImgContainer>
               <Box sx={{ padding: "1rem" }}>
-                <Typography variant="body2" sx={{ fontWeight: "700" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: "700", fontSize: "20px", color: "#5c6" }}
+                >
                   {i.tittle}
                 </Typography>
-                <Typography variant="body2" sx={{ my: 1 }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    my: 1,
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    color: "#7A7A7E",
+                  }}
+                >
                   {i.bodyText}
                 </Typography>
               </Box>
-            </HouseBox>
+            </ImageBox>
           ))}
-        </PropertiesBox>
+        </SpecialitiesBox>
       </Container>
     </Box>
   );
