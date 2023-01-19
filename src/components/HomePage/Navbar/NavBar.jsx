@@ -8,8 +8,11 @@ import { useState } from "react";
 import { mainListItems } from "./ListItem";
 import logo from "../../../assets/logo.png";
 import CustomButton from "../../CustomButtom/CustomButton";
+import ProfileIconDropdown from "../../UpdateProfile/Profile";
 
-export const Navbar = () => {
+export const Navbar = (props) => {
+  const { isAuth } = props;
+  console.log(isAuth);
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -132,16 +135,22 @@ export const Navbar = () => {
           gap: "1rem",
         }}
       >
-        <NavLink variant="body2" component={Links} to="/signIn">
-          Sign In
-        </NavLink>
-        <NavLink component={Links} to="/signUp">
-          <CustomButton
-            backgroundColor="#5c5"
-            color="#fff"
-            buttonText="Register"
-          />
-        </NavLink>
+        {isAuth ? (
+          <ProfileIconDropdown />
+        ) : (
+          <>
+            <NavLink variant="body2" component={Links} to="/signin">
+              Sign In
+            </NavLink>
+            <NavLink component={Links} to="/signup">
+              <CustomButton
+                backgroundColor="#5c5"
+                color="#fff"
+                buttonText="Register"
+              />
+            </NavLink>
+          </>
+        )}
       </Box>
     </NavbarContainer>
   );

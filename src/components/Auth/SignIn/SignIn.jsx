@@ -1,12 +1,10 @@
-import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { LockOutlined } from "@mui/icons-material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
   Alert,
   Avatar,
   Button,
   Grid,
-  IconButton,
-  InputAdornment,
   Link,
   Paper,
   styled,
@@ -17,13 +15,13 @@ import * as Yup from "yup";
 
 import React, { useState } from "react";
 
-import doctor from "../../assets/login.jpg";
+import doctor from "../../../assets/login.jpg";
 import axios from "axios";
 import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
-import Hero from "../HomePage/Hero/Hero";
-import Navbar from "../HomePage/Navbar/NavBar";
-import Footer from "../HomePage/Footer/Footer";
+
+import Navbar from "../../HomePage/Navbar/NavBar";
+import Footer from "../../HomePage/Footer/Footer";
 import { Box, Stack } from "@mui/system";
 
 function SignIn() {
@@ -31,56 +29,40 @@ function SignIn() {
   const initialValues = {
     email: "",
     password: "",
-    showPassword: false,
   };
 
-  const [values, setValues] = useState(initialValues);
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const history = useHistory();
-  const handleSubmit = async (values, props) => {
-    const { email, password, isVisible } = values;
-    if (true) {
+  const handleSubmit = (values, props) => {
+    console.log("I'm xubmitted");
+
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+
+    try {
+      setError("");
       setLoading(true);
-      //conditional user rendering
-      password == "doctor123" ? navigate("/doctor") : navigate("/patient");
+      console.log(values);
+      // axios.post("", values).then((res) => {
+      //   console.log(res);
+      // });
+
+      // navigate("/signin");
+    } catch (error) {
+      setError("Failed to create an account");
     }
 
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 2000);
-    //change the url accordinglyy
-    // // axios
-    // //   .post("http://localhost:8080/api/login", { email, password })
-    // //   .then((response) => {
-    // //     if (response.data.success) {
-    // //       setError("");
-    // //       setLoading(true);
-    // //       console.log(response.data);
-    // //       //  localStorage.setItem('jwt', response.data.token);
-    // //       // redirect to home/dashboard page
-    // //       // history.push("/dashboard");
+    // //   useEffect(() => {
+    // //     if (currentUser!== null){
+
     // //     }
-    // //   })
-    //   .catch((error) => {
-    //     setError("Failed to Sign In Enter the Correct Credential ");
-    //   });
 
-    setLoading(false);
+    // //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // // }, [currentUser])
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Please enter a valid email")
@@ -113,8 +95,16 @@ function SignIn() {
       margin: "20px 5px 20px 5px",
     },
   }));
-  const avatarStyle = { backgroundColor: "#7BE495" };
-  const btnstyle = { backgroundColor: "#56c596", margin: "8px 0" };
+  const avatarStyle = { backgroundColor: "#5c6" };
+  const btnstyle = {
+    backgroundColor: "#5c6",
+    margin: "8px 0",
+    hover: {
+      backgroundColor: "white",
+      color: "#5c6",
+      borderColor: "#5c6",
+    },
+  };
 
   return (
     <>
@@ -156,7 +146,13 @@ function SignIn() {
                     name="email"
                     autoComplete="email"
                     autoFocus
-                    helperText={<ErrorMessage name="email" />}
+                    helperText={
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    }
                   />
 
                   <Field
@@ -170,37 +166,24 @@ function SignIn() {
                     label="Password"
                     placeholder="Enter Password"
                     id="password"
-                    type={values.showPassword ? "text" : "password"}
+                    type="password"
                     autoComplete="current-password"
-                    helperText={<ErrorMessage name="password" />}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {values.showPassword ? (
-                              <VisibilityOff />
-                            ) : (
-                              <Visibility />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
+                    helperText={
+                      <ErrorMessage
+                        name="password"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    }
                   />
 
                   <Button
                     type="submit"
                     style={btnstyle}
                     variant="contained"
-                    disabled={loading}
-                    // disabled={props.isSubmitting}
+                    disabled={props.isSubmitting}
                   >
-                    {loading ? "Loading..." : "Sign In"}
+                    {props.isSubmitting ? "Loading..." : "Sign In"}
                   </Button>
                 </Form>
               )}

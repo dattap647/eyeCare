@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -14,53 +14,43 @@ import {
   FormLabel,
   Button,
   FormHelperText,
-  InputAdornment,
-  IconButton,
   styled,
-  FormGroup,
-  Select,
-  MenuItem,
+  Alert,
 } from "@mui/material";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {
-  AddCircleOutlineOutlined,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
-import { Box, Stack } from "@mui/system";
-import Navbar from "../HomePage/Navbar/NavBar";
-import Footer from "../HomePage/Footer/Footer";
+import { AddCircleOutlineOutlined } from "@mui/icons-material";
+import { Stack } from "@mui/system";
+import Navbar from "../../HomePage/Navbar/NavBar";
+import Footer from "../../HomePage/Footer/Footer";
+
+import axios from "axios";
 const Signup = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  var createUser;
   const initialValues = {
-    Firstname: "",
-    Lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     gender: "",
     phoneNumber: "",
     password: "",
     confirmPassword: "",
     address: "",
-    role: "",
-    doctorLicenceNumber: "",
     termsAndConditions: false,
   };
 
-  const [showInput, setShowInput] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-
   const validationSchema = Yup.object().shape({
-    Firstname: Yup.string().min(3, "It's too short").required("Required"),
-    Lastname: Yup.string().min(3, "It's too short").required("Required"),
+    firstName: Yup.string().min(3, "It's too short").required("Required"),
+    lastName: Yup.string().min(3, "It's too short").required("Required"),
     email: Yup.string().email("Enter valid email").required("Required"),
     gender: Yup.string()
       .oneOf(["male", "female"], "Required")
       .required("Required"),
-
-    role: Yup.string().required("required"),
-    doctorLicenceNumber: Yup.number().required("Required"),
     address: Yup.string().required("required"),
     phoneNumber: Yup.number()
       .typeError("Enter valid Phone Number")
@@ -71,27 +61,40 @@ const Signup = () => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Password not matched")
       .required("Required"),
-
     termsAndConditions: Yup.string().oneOf(
       ["true"],
       "Accept terms & conditions"
     ),
   });
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
-  const onSubmit = (values, props) => {
-    navigate("/signin");
-    // console.log(values);
-    // console.log(props);
+  const handleSubmit = async (values, props) => {
+    console.log("I'm xubmitted");
 
-    // props.setSubmitting(false);
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 2000);
-    //Perform authenctication
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+
+    try {
+      setError("");
+      setLoading(true);
+      console.log(values);
+      // axios.post("", values).then((res) => {
+      //   console.log(res);
+      // });
+
+      // navigate("/signin");
+    } catch (error) {
+      setError("Failed to create an account");
+    }
+
+    // //   useEffect(() => {
+    // //     if (currentUser!== null){
+
+    // //     }
+
+    // //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // // }, [currentUser])
   };
   const PaperContainer = styled(Paper)(({ theme }) => ({
     padding: 20,
@@ -118,15 +121,30 @@ const Signup = () => {
             <Avatar style={avatarStyle}>
               <AddCircleOutlineOutlined />
             </Avatar>
+            <h4
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Link to="/signup-doctor">Sign Up As Doctor</Link>
+            </h4>
+
             <h2 style={headerStyle}>Sign Up</h2>
             <Typography variant="caption" gutterBottom>
               Please fill this form to create an account !
             </Typography>
           </Grid>
+          {error && (
+            <Alert severity="error" sx={{ my: 1, width: "100%" }}>
+              {error}
+            </Alert>
+          )}
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
           >
             {(props) => (
               <Form>
@@ -134,22 +152,34 @@ const Signup = () => {
                   <Field
                     as={TextField}
                     fullWidth
-                    name="firstname"
-                    label="Firstname"
+                    name="firstName"
+                    label="First Name"
                     color="success"
                     style={{ marginTop: 16 }}
                     placeholder="Enter your First name"
-                    helperText={<ErrorMessage name="firstname" />}
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="firstName"
+                      />
+                    }
                   />
                   <Field
                     as={TextField}
                     fullWidth
-                    name="lastname"
-                    label="Lastname"
+                    name="lastName"
+                    label="Last Name"
                     color="success"
                     style={{ marginTop: 16 }}
                     placeholder="Enter your Last name"
-                    helperText={<ErrorMessage name="lastname" />}
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="lastName"
+                      />
+                    }
                   />
                 </Stack>
                 <Field
@@ -160,7 +190,13 @@ const Signup = () => {
                   color="success"
                   style={{ marginTop: 16 }}
                   placeholder="Enter your Email"
-                  helperText={<ErrorMessage name="email" />}
+                  helperText={
+                    <ErrorMessage
+                      component="div"
+                      style={{ color: "red" }}
+                      name="email"
+                    />
+                  }
                 />
                 <Stack>
                   <Field
@@ -171,27 +207,35 @@ const Signup = () => {
                     color="success"
                     style={{ marginTop: 16 }}
                     placeholder="Enter your Address"
-                    helperText={<ErrorMessage name="address" />}
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="address"
+                      />
+                    }
                   />
                 </Stack>
                 <Stack
                   spacing={2}
                   direction="row"
-                  style={{ display: "flex", marginTop: 16 }}
+                  style={{
+                    display: "flex",
+                    marginTop: 16,
+                    alignItems: "baseline",
+                  }}
                 >
                   <FormControl
                     component="fieldset"
-                    style={{ marginLeft: 20, marginTop: 5 }}
+                    style={{
+                      marginLeft: 20,
+                      marginTop: 5,
+                    }}
                   >
                     <FormLabel component="legend" color="success">
                       Gender
                     </FormLabel>
-                    <Field
-                      as={RadioGroup}
-                      aria-label="gender"
-                      name="gender"
-                      style={{ display: "inline-grid" }}
-                    >
+                    <Field as={RadioGroup} aria-label="gender" name="gender">
                       <FormControlLabel
                         value="female"
                         control={<Radio color="success" />}
@@ -202,115 +246,88 @@ const Signup = () => {
                         control={<Radio color="success" />}
                         label="Male"
                       />
+                      <FormHelperText>
+                        <ErrorMessage
+                          component="div"
+                          style={{ color: "red" }}
+                          name="gender"
+                        />
+                      </FormHelperText>
                     </Field>
                   </FormControl>
-                  <FormHelperText>
-                    <ErrorMessage name="gender" />
-                  </FormHelperText>
 
-                  <TextField
-                    name="role"
-                    label="Designation"
-                    size="medium"
-                    select
-                    onChange={(event) => {
-                      setShowInput(event.target.value === "doctor");
-                    }}
-                    color="success"
-                    style={{ width: "250px", marginLeft: 60, marginTop: 16 }}
-                    helperText={<ErrorMessage name="role" />}
-                  >
-                    <MenuItem value="doctor" label="doctor">
-                      Doctor
-                    </MenuItem>
-                    <MenuItem value="user" label="user">
-                      User
-                    </MenuItem>
-                  </TextField>
-                </Stack>
-                {showInput && (
                   <Field
                     as={TextField}
                     fullWidth
-                    name="doctorLicenceNumber:"
-                    label="Doctor Licence Number:"
+                    name="phoneNumber"
+                    label="Phone Number"
                     color="success"
                     style={{ marginTop: 16 }}
-                    placeholder="Enter Licence Number"
-                    helperText={<ErrorMessage name="doctorLicenceNumber" />}
+                    placeholder="Enter your phone number"
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="phoneNumber"
+                      />
+                    }
                   />
-                )}
-                <Field
-                  as={TextField}
-                  fullWidth
-                  name="phoneNumber"
-                  label="Phone Number"
-                  color="success"
-                  style={{ marginTop: 16 }}
-                  placeholder="Enter your phone number"
-                  helperText={<ErrorMessage name="phoneNumber" />}
-                />
+                </Stack>
+
                 <Field
                   as={TextField}
                   fullWidth
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type="password"
                   label="Password"
                   color="success"
                   style={{ marginTop: 16 }}
                   placeholder="Enter your password"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  helperText={<ErrorMessage name="password" />}
+                  helperText={
+                    <ErrorMessage
+                      component="div"
+                      style={{ color: "red" }}
+                      name="password"
+                    />
+                  }
                 />
                 <Field
                   as={TextField}
                   fullWidth
                   name="confirmPassword"
-                  type={showPassword ? "text" : "password"}
+                  type="password"
                   label="Confirm Password"
                   color="success"
                   style={{ marginTop: 16 }}
                   placeholder="Confirm your password"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  helperText={<ErrorMessage name="confirmPassword" />}
-                />
-                <FormControlLabel
-                  control={
-                    <Field
-                      as={Checkbox}
-                      color="success"
-                      name="termsAndConditions"
+                  helperText={
+                    <ErrorMessage
+                      component="div"
+                      style={{ color: "red" }}
+                      name="confirmPassword"
+                      color="error"
                     />
                   }
-                  label="I accept the terms and conditions."
                 />
-                <FormHelperText>
-                  <ErrorMessage name="termsAndConditions" />
-                </FormHelperText>
+                <Stack alignItems="center">
+                  <FormControlLabel
+                    control={
+                      <Field
+                        as={Checkbox}
+                        color="success"
+                        name="termsAndConditions"
+                      />
+                    }
+                    label="I accept the terms and conditions."
+                  />
+                  <FormHelperText>
+                    <ErrorMessage
+                      component="div"
+                      style={{ color: "red" }}
+                      name="termsAndConditions"
+                    />
+                  </FormHelperText>
+                </Stack>
                 <Button
                   type="submit"
                   variant="contained"

@@ -43,7 +43,7 @@ const Footer = () => {
   }));
 
   return (
-    <Box sx={{ py: 10, bgcolor: "#E6F0FF" }}>
+    <Box sx={{ py: 10, bgcolor: "#E6F0FF", mt: "10px" }}>
       <CustomContainer>
         <CustomContainer>
           <Box>

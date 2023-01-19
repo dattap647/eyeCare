@@ -1,25 +1,18 @@
 const usestyle = () => ({
   container: {
     display: "flex",
-    flexDirection: "column",
+
+    flexDirection: "row",
   },
 
   card: {
-    minWidth: "275px",
+    minWidth: "180px",
   },
   cardTitle: {
     textAlign: "center",
     padding: "2px 0",
   },
-  cardIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "2rem",
-    padding: 2,
-    color: "#000",
-    // color:'#3c44b1',
-  },
+
   cardContent: {
     display: "flex",
     alignItems: "center",

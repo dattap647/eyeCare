@@ -1,9 +1,8 @@
 import { Box, Card, styled, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import doctor from "./DoctorList";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import Carousel from "react-material-ui-carousel";
+
 const Teams = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
     width: "30%",
@@ -31,14 +30,14 @@ const Teams = () => {
     display: "flex",
     flexDirection: "Column",
     alignItems: "center",
-
+    width: "360px",
     padding: "10px",
-    maxWidth: "381px",
-    margin: "8px auto",
+    maxWidth: "430px",
+    margin: theme.spacing(1, 2, 1, 4),
     backgroundColor: "#E6F0FF",
     // marginTop: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
-      margin: theme.spacing(2, 2, 2),
+      margin: theme.spacing(2, 2, 1, 2),
     },
   }));
 
@@ -84,7 +83,7 @@ const Teams = () => {
       </CustomBox>
 
       <Services>
-        <AutoPlaySwipeableViews sx={{ alignItems: "center" }}>
+        <Carousel sx={{ width: "400px" }} indicators={false}>
           {doctor.map((step, index) => (
             <ServiceBox>
               <Box
@@ -123,7 +122,7 @@ const Teams = () => {
               </Stack>
             </ServiceBox>
           ))}
-        </AutoPlaySwipeableViews>
+        </Carousel>
       </Services>
     </Box>
   );

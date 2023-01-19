@@ -15,6 +15,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import doctor from "../../assets/forgotpassword.jpg";
+import CustomButton from "../CustomButtom/CustomButton";
 import Footer from "../HomePage/Footer/Footer";
 import Navbar from "../HomePage/Navbar/NavBar";
 
@@ -23,7 +24,7 @@ function ForgotPassword() {
     email: "",
   };
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const [message, setMessage] = useState("");
 
   const validationSchema = Yup.object().shape({
@@ -41,14 +42,12 @@ function ForgotPassword() {
     try {
       setMessage("");
       setError("");
-      setLoading(true);
+
       //  resetPassword using values.email
       setMessage("Check your Email Inbox for further instructions");
     } catch (error) {
       setError("Failed to Reset Password");
     }
-
-    setLoading(false);
   };
 
   const ImageBox = styled(Box)(({ theme }) => ({
@@ -82,8 +81,8 @@ function ForgotPassword() {
     width: 300,
     color: "#56c595",
   };
-  const avatarStyle = { backgroundColor: "#7BE495" };
-  const btnstyle = { backgroundColor: "#56c596", margin: "40px 0" };
+  const avatarStyle = { backgroundColor: "#5c6" };
+  const btnstyle = { backgroundColor: "#56c596", margin: "10px 0" };
 
   return (
     <>
@@ -131,20 +130,23 @@ function ForgotPassword() {
                     name="email"
                     autoComplete="email"
                     autoFocus
-                    helperText={<ErrorMessage name="email" />}
+                    helperText={
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    }
                   />
-
                   <Button
                     type="submit"
                     variant="contained"
+                    disabled={props.isSubmitting}
                     style={btnstyle}
-                    disabled={loading}
-                    // disabled={props.isSubmitting}
-                    onClick={() => {}}
+                    color="primary"
                   >
-                    {loading ? "Loading..." : "Reset Password"}
+                    {props.isSubmitting ? "Loading" : "Reset Password"}
                   </Button>
-
                   <Grid container>
                     <Grid item xs={12} sm={6}>
                       <Link href="/signin" variant="body2">

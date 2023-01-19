@@ -29,6 +29,8 @@ import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ConfirmDialog from "../confirmDialog/ConfirmDialog";
+import Footer from "../HomePage/Footer/Footer";
+import Navbar from "../HomePage/Navbar/NavBar";
 import Notification from "../Notification/Notification";
 import { secondaryListItems } from "./ListItem";
 
@@ -92,122 +94,19 @@ function DashboardContent({ title, children, mainListItems }) {
   const handleProfile = () => {
     navigate("/");
   };
-  const handleClickNotification = () => {
-    setNotify({
-      isOpen: true,
-      message: "Notifications coming soon! 😃",
-      type: "info",
-    });
-    //   setOpenPopup(true);
-    //   setTimeout(function () {
-    //     setOpenPopup(false);
-    //   }, 3000);
-  };
 
   return (
     <>
+      <Navbar isAuth={true} sx={{ margin: "-10px" }} />
       <Box>
-        <CssBaseline />
-        <AppBar style={{ backgroundColor: "#329d9c" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(openDrawer && { display: "none" }),
-              }}
-            >
-              <Tooltip title="Menu">
-                <Menu />
-              </Tooltip>
-            </IconButton>
-
-            {/* Titile on DashboardContent */}
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              align="center"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              {title}
-            </Typography>
-
-            <IconButton onClick={handleClickNotification}>
-              <Badge badgeContent={1} color="secondary">
-                <Notifications />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer open={openDrawer} onClose={toggleDrawer} style={{ width: 400 }}>
-          <Stack direction="row">
-            {" "}
-            <Typography
-              variant="h4"
-              color="text.success"
-              align="center"
-              margin={1}
-            >
-              Eye Care
-            </Typography>
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                px: [1],
-              }}
-            >
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeft />
-              </IconButton>
-            </Toolbar>
-          </Stack>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List> {secondaryListItems}</List>
-
-          <List sx={{ mt: "auto" }}>
-            <Tooltip title="Account">
-              <ListItem button onClick={handleProfile}>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
-                {/* <ListItemText
-                primary={currentUser.displayName || currentUser.email}
-              /> */}
-                <ListItemText primary="Username" />
-              </ListItem>
-            </Tooltip>
-          </List>
-          <List>
-            <Tooltip title="Logout">
-              <ListItem button className="flex-end" onClick={handleLogout}>
-                <ListItemIcon>
-                  <ExitToApp />
-                </ListItemIcon>
-                <ListItemText primary="Logout" />
-              </ListItem>
-            </Tooltip>
-          </List>
-        </Drawer>
-
         <Box
           component="main"
           sx={{
-            backgroundColor: "#cff4d2",
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
           }}
         >
-          <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {error && (
@@ -217,10 +116,10 @@ function DashboardContent({ title, children, mainListItems }) {
               )}
               {children}
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
+      <Footer />
       <ConfirmDialog confirmDialog={confirmDialog} />
       <Notification notify={notify} setNotify={setNotify} />
     </>
@@ -228,11 +127,5 @@ function DashboardContent({ title, children, mainListItems }) {
 }
 
 export default function Dashboard({ title, children, mainListItems }) {
-  return (
-    <DashboardContent
-      title={title}
-      children={children}
-      mainListItems={mainListItems}
-    />
-  );
+  return <DashboardContent children={children} mainListItems={mainListItems} />;
 }
