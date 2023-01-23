@@ -6,12 +6,13 @@ import Signup from "./components/Auth/SignUp/SignUpUser";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import AuthProvider from "./Context/Authcontext";
-
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import PageNotFound from "./Pages/404/404";
 
 import Home from "./Pages/Home/Home";
 import PrivateDoctorRoute from "./Routes/Doctors/DoctorRoutes";
 import PrivatePatientRoute from "./Routes/Patients/PatientRoute";
+import Terms from "./Pages/Term&Conditions/Terms";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup-doctor" element={<DrSignup />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/terms-&-conditions" element={<Terms />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/patient/*" element={<PrivatePatientRoute />} />
         <Route path="/doctor/*" element={<PrivateDoctorRoute />} />

@@ -15,7 +15,7 @@ import * as Yup from "yup";
 
 import React, { useState } from "react";
 
-import doctor from "../../../assets/login.jpg";
+import doctor from "../../../assets/login.png";
 import axios from "axios";
 import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
@@ -45,6 +45,7 @@ function SignIn() {
       setError("");
       setLoading(true);
       console.log(values);
+      navigate("/patient/dashboard");
       // axios.post("", values).then((res) => {
       //   console.log(res);
       // });
@@ -77,7 +78,7 @@ function SignIn() {
     color: "#56c595",
   };
   const ImageBox = styled(Box)(({ theme }) => ({
-    flex: "1",
+    marginRight: "150px",
     display: "block",
 
     [theme.breakpoints.down("md")]: {
@@ -92,7 +93,7 @@ function SignIn() {
     [theme.breakpoints.down("md")]: {
       height: "450px",
 
-      margin: "20px 5px 20px 5px",
+      margin: "50px 5px 20px 5px",
     },
   }));
   const avatarStyle = { backgroundColor: "#5c6" };
@@ -107,12 +108,12 @@ function SignIn() {
   };
 
   return (
-    <>
+    <Box backgroundColor="#E6F0FF">
       <Navbar />
       <Grid display="inline-flex">
         <Stack direction="row">
-          <ImageBox sx={{ flex: "1" }}>
-            <img src={doctor} alt="doctor" style={{ width: "50%" }} />
+          <ImageBox>
+            <img src={doctor} alt="doctor" style={{ width: "90%" }} />
           </ImageBox>
           <PaperContainer elevation={10}>
             <Grid align="center">
@@ -200,7 +201,7 @@ function SignIn() {
         </Stack>
       </Grid>
       <Footer />
-    </>
+    </Box>
   );
 }
 

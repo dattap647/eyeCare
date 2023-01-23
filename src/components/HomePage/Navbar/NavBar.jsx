@@ -3,15 +3,23 @@ import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container } from "@mui/system";
 import { Link as Links } from "react-router-dom";
-import { Drawer, Link, List, styled } from "@mui/material";
+import { Drawer, IconButton, Link, List, styled } from "@mui/material";
 import { useState } from "react";
 import { mainListItems } from "./ListItem";
 import logo from "../../../assets/logo.png";
-import CustomButton from "../../CustomButtom/CustomButton";
+import CustomButton from "../../CustomButton/CustomButton";
 import ProfileIconDropdown from "../../UpdateProfile/Profile";
+import Footer from "../Footer/Footer";
+import Notification from "../../Notification/Notification";
+import { Notifications } from "@mui/icons-material";
 
 export const Navbar = (props) => {
   const { isAuth } = props;
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   console.log(isAuth);
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
@@ -118,10 +126,10 @@ export const Navbar = (props) => {
           <NavLink variant="body2" component={Links} to="/signIn">
             Services
           </NavLink>
-          <NavLink variant="body2" component={Links} to="/signIn">
+          <NavLink variant="body2" component={Links} to="/terms-&-conditions">
             About Us
           </NavLink>
-          <NavLink variant="body2" component={Links} to="/signIn">
+          <NavLink variant="body2" component={Links} to="">
             Contact Us
           </NavLink>
         </NavbarLinksBox>
@@ -136,7 +144,12 @@ export const Navbar = (props) => {
         }}
       >
         {isAuth ? (
-          <ProfileIconDropdown />
+          <>
+            <ProfileIconDropdown />
+            <IconButton onClick={setNotify}>
+              <Notifications />
+            </IconButton>
+          </>
         ) : (
           <>
             <NavLink variant="body2" component={Links} to="/signin">
@@ -152,6 +165,7 @@ export const Navbar = (props) => {
           </>
         )}
       </Box>
+      <Notification notify={notify} setNotify={setNotify} />
     </NavbarContainer>
   );
 };

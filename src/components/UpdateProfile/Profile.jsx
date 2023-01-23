@@ -1,8 +1,10 @@
 import { AccountCircle } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfileIconDropdown = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -10,6 +12,7 @@ const ProfileIconDropdown = () => {
   };
 
   const handleClose = () => {
+    navigate("/patient/profile");
     setAnchorEl(null);
   };
 

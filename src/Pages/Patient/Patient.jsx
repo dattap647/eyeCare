@@ -2,12 +2,13 @@ import React from "react";
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import PageNotFound from "../404/404";
 import PatientAppointment from "./PatientAppointment";
-import PatientAppointmentHistory from "./PatientAppointmentHistory";
 import PatientDashboard from "./PatientDashboard";
 import { mainListItems } from "./PatientListItem";
-import PatientReport from "./PatientReport";
+import PatientPrescriptions from "./PatientPrescriptions";
+import PatientRcords from "./PatientRecords";
 
 function Patient() {
   return (
@@ -17,7 +18,6 @@ function Patient() {
         path="/"
         element={
           <Dashboard
-            title="Patient Dashboard"
             children={<PatientDashboard />}
             mainListItems={mainListItems}
           />
@@ -45,20 +45,22 @@ function Patient() {
       />
       <Route
         path="/reports"
+        element={<Dashboard children={<PatientRcords />} />}
+      />
+      <Route
+        path="/prescriptions"
         element={
           <Dashboard
-            title="Patient Dashboard"
-            children={<PatientReport />}
+            children={<PatientPrescriptions />}
             mainListItems={mainListItems}
           />
         }
       />
       <Route
-        path="/history"
+        path="/profile"
         element={
           <Dashboard
-            title="Patient Dashboard"
-            children={<PatientAppointmentHistory />}
+            children={<UpdateProfile />}
             mainListItems={mainListItems}
           />
         }
