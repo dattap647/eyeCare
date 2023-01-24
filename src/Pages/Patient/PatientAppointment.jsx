@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Link, Paper, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -14,11 +14,13 @@ function PatientAppointment() {
       <Paper elevation={5} sx={{ padding: "10px", margin: "0 auto" }}>
         <div id="pat_appointments" className="tab-pane fade show active">
           <Box sx={{ display: "flex", justifyContent: "end", my: 2 }}>
-            <CustomButton
-              color="white"
-              backgroundColor="#5c6"
-              buttonText="Book Appointment"
-            />
+            <Link href="/patient/booking" underline="none">
+              <CustomButton
+                color="white"
+                backgroundColor="#5c6"
+                buttonText="Book Appointment"
+              />
+            </Link>
           </Box>
 
           <div className="card card-table mb-0">

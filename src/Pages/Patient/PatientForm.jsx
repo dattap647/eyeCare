@@ -1,23 +1,40 @@
-import { Alert, Button, Grid, TextField } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  Paper,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
+import { Box, Container, Stack } from "@mui/system";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import usestyle from "./style";
 function PatientForm() {
   const useStyle = usestyle();
-  const initialValues = {
-    specialization: "",
-    doctor: "",
-  };
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const status = "active";
+
   const [message, setMessage] = useState("");
 
   const validationSchema = Yup.object().shape({
     specialization: Yup.string().required("Please select a specialization"),
     doctor: Yup.string().required("Please select a doctor"),
   });
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+  };
 
   const handleSubmit = (values, props) => {
     setTimeout(() => {
@@ -38,64 +55,120 @@ function PatientForm() {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      {(props) => (
-        <Form style={useStyle.root}>
-          <Grid container style={useStyle.container}>
-            {error && (
-              <Alert severity="error" sx={{ my: 1, width: "100%" }}>
-                {error}
-              </Alert>
-            )}
+    <Container color="primary">
+      <Grid container>
+        <Grid item lg={9}>
+          <Paper>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {(props) => (
+                <Form>
+                  <Stack direction="row" spacing={2}>
+                    <Field
+                      as={TextField}
+                      fullWidth
+                      name="firstName"
+                      label="Firstname"
+                      color="success"
+                      style={{ marginTop: 16 }}
+                      placeholder="Enter your First name"
+                      helperText={
+                        <ErrorMessage
+                          component="div"
+                          style={{ color: "red", margin: "0" }}
+                          name="firstName"
+                        />
+                      }
+                    />
+                    <Field
+                      as={TextField}
+                      fullWidth
+                      name="lastName"
+                      label="Lastname"
+                      color="success"
+                      style={{ marginTop: 16 }}
+                      placeholder="Enter your Last name"
+                      helperText={
+                        <ErrorMessage
+                          component="div"
+                          style={{ color: "red" }}
+                          name="lastName"
+                        />
+                      }
+                    />
+                  </Stack>
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    name="email"
+                    label="Email"
+                    color="success"
+                    style={{ marginTop: 16 }}
+                    placeholder="Enter your Email"
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="email"
+                      />
+                    }
+                  />
 
-            {message && (
-              <Alert severity="success" sx={{ my: 1, width: "100%" }}>
-                {message}
-              </Alert>
-            )}
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Field
-              as={TextField}
-              variant="outlined"
-              label="Name"
-              name="name"
-              id="name"
-              select
-              fullWidth
-              helperText={<ErrorMessage name="name" />}
-            ></Field>
-            <Field
-              as={TextField}
-              variant="outlined"
-              label="Category"
-              name="category"
-              id="category"
-              select
-              fullWidth
-              helperText={<ErrorMessage name="cateory" />}
-            />
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    name="address"
+                    label="Address"
+                    color="success"
+                    style={{ marginTop: 16 }}
+                    placeholder="Enter your Address"
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="address"
+                      />
+                    }
+                  />
 
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <Button
-                variant="contained"
-                type="submit"
-                style={useStyle.btnstyle}
-                disabled={loading}
-                sx={{ m: 2 }}
-              >
-                {loading ? "Loading..." : "Book Appointment"}
-              </Button>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+                  <Field
+                    as={TextField}
+                    fullWidth
+                    name="phoneNumber"
+                    label="Phone Number"
+                    color="success"
+                    style={{ marginTop: 16 }}
+                    placeholder="Enter your phone number"
+                    helperText={
+                      <ErrorMessage
+                        component="div"
+                        style={{ color: "red" }}
+                        name="phoneNumber"
+                      />
+                    }
+                  />
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={props.isSubmitting}
+                    color="primary"
+                  >
+                    {props.isSubmitting ? "Loading" : "Book"}
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </Paper>
+        </Grid>
+        <Grid item lg={3}>
+          <Box bgcolor="primary">ye</Box>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
