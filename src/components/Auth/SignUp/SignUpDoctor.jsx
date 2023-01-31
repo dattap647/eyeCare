@@ -16,7 +16,6 @@ import {
   FormHelperText,
   styled,
   Alert,
-  Box,
 } from "@mui/material";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -45,9 +44,15 @@ const DrSignup = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().min(3, "It's too short").required("Required"),
-    lastName: Yup.string().min(3, "It's too short").required("Required"),
-    email: Yup.string().email("Enter valid email").required("Required"),
+    firstName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    email: Yup.string()
+      .email("Enter valid email")
+      .required("Required"),
     gender: Yup.string()
       .oneOf(["male", "female"], "Required")
       .required("Required"),
@@ -107,7 +112,7 @@ const DrSignup = () => {
   const marginTop = { marginTop: 5 };
 
   return (
-    <Box backgroundColor="#E6F0FF">
+    <>
       <Navbar />
       <Grid display="inline-flex">
         <PaperContainer elevation={10}>
@@ -152,7 +157,7 @@ const DrSignup = () => {
                     helperText={
                       <ErrorMessage
                         component="div"
-                        style={{ color: "red", margin: "0" }}
+                        style={{ color: "red" }}
                         name="firstName"
                       />
                     }
@@ -371,7 +376,7 @@ const DrSignup = () => {
         </PaperContainer>
       </Grid>
       <Footer />
-    </Box>
+    </>
   );
 };
 
