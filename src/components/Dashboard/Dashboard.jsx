@@ -5,26 +5,7 @@ import {
   Menu,
   Notifications,
 } from "@mui/icons-material";
-import {
-  Alert,
-  AppBar,
-  Badge,
-  Box,
-  Container,
-  CssBaseline,
-  Divider,
-  Drawer,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import { Stack } from "@mui/system";
+import { Alert, Box, Container, Grid, Typography } from "@mui/material";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,27 +13,8 @@ import ConfirmDialog from "../confirmDialog/ConfirmDialog";
 import Footer from "../HomePage/Footer/Footer";
 import Navbar from "../HomePage/Navbar/NavBar";
 import Notification from "../Notification/Notification";
-import { secondaryListItems } from "./ListItem";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://eyecare.com" target="blank">
-        EyeCare
-      </Link>
-      {new Date().getFullYear()}
-    </Typography>
-  );
-}
 
 function DashboardContent({ title, children, mainListItems }) {
-  const [openDrawer, setOpen] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   // const [openPopup, setOpenPopup]= useState(false);
@@ -66,9 +28,6 @@ function DashboardContent({ title, children, mainListItems }) {
     title: "",
     subTitle: "",
   });
-  const toggleDrawer = () => {
-    setOpen(!openDrawer);
-  };
 
   const handleLogout = () => {
     setConfirmDialog({
@@ -97,13 +56,13 @@ function DashboardContent({ title, children, mainListItems }) {
 
   return (
     <>
-      <Navbar isAuth={true} sx={{ margin: "-10px" }} />
+      <Navbar isAuth={true} />
       <Box>
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            height: "100vh",
+
             overflow: "auto",
           }}
         >

@@ -68,7 +68,7 @@ const Footer = () => {
               Think of Eye ,Think of Eye care Clinic.
             </Typography>
 
-            <FooterLink component={Links} to="/signIn">
+            <FooterLink component={Links} to="/terms-&-conditions">
               Terms of use
             </FooterLink>
             <br />

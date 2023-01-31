@@ -2,12 +2,16 @@ import React from "react";
 
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
+import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import PageNotFound from "../404/404";
+import ConfirmBooking from "./ConfirmBooking";
+
 import PatientAppointment from "./PatientAppointment";
-import PatientAppointmentHistory from "./PatientAppointmentHistory";
+import PatientBooking from "./PatientBooking";
 import PatientDashboard from "./PatientDashboard";
-import { mainListItems } from "./PatientListItem";
-import PatientReport from "./PatientReport";
+
+import PatientPrescriptions from "./PatientPrescriptions";
+import PatientRcords from "./PatientRecords";
 
 function Patient() {
   return (
@@ -15,13 +19,7 @@ function Patient() {
       <Route
         exact
         path="/"
-        element={
-          <Dashboard
-            title="Patient Dashboard"
-            children={<PatientDashboard />}
-            mainListItems={mainListItems}
-          />
-        }
+        element={<Dashboard children={<PatientDashboard />} />}
       />
       <Route
         path="/dashboard"
@@ -29,7 +27,6 @@ function Patient() {
           <Dashboard
             title="Patient Dashboard"
             children={<PatientDashboard />}
-            mainListItems={mainListItems}
           />
         }
       />
@@ -39,29 +36,28 @@ function Patient() {
           <Dashboard
             title="Patient Dashboard"
             children={<PatientAppointment />}
-            mainListItems={mainListItems}
           />
         }
       />
       <Route
         path="/reports"
-        element={
-          <Dashboard
-            title="Patient Dashboard"
-            children={<PatientReport />}
-            mainListItems={mainListItems}
-          />
-        }
+        element={<Dashboard children={<PatientRcords />} />}
       />
       <Route
-        path="/history"
-        element={
-          <Dashboard
-            title="Patient Dashboard"
-            children={<PatientAppointmentHistory />}
-            mainListItems={mainListItems}
-          />
-        }
+        path="/prescriptions"
+        element={<Dashboard children={<PatientPrescriptions />} />}
+      />
+      <Route
+        path="/profile"
+        element={<Dashboard children={<UpdateProfile />} />}
+      />
+      <Route
+        path="/booking"
+        element={<Dashboard children={<PatientBooking />} />}
+      />
+      <Route
+        path="/booking-confirmed"
+        element={<Dashboard children={<ConfirmBooking />} />}
       />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

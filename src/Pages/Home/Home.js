@@ -1,4 +1,5 @@
 import React from "react";
+import Welcome from "../../components/HomePage/Doctor/Welcom";
 import Footer from "../../components/HomePage/Footer/Footer";
 
 import Hero from "../../components/HomePage/Hero/Hero";
@@ -10,6 +11,7 @@ function Home() {
   return (
     <>
       <Hero />
+      <Welcome />
       <Services />
       <Specialities />
       <Teams />
