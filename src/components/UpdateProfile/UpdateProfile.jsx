@@ -62,33 +62,7 @@ function UpdateProfile() {
                     />
                   </div>
                 </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Date of Birth</label>
-                    <div className="cal-icon">
-                      <input
-                        type="text"
-                        className="form-control datetimepicker"
-                        value="24-07-1983"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Blood Group</label>
-                    <select className="form-control select">
-                      <option>A-</option>
-                      <option>A+</option>
-                      <option>B-</option>
-                      <option>B+</option>
-                      <option>AB-</option>
-                      <option>AB+</option>
-                      <option>O-</option>
-                      <option>O+</option>
-                    </select>
-                  </div>
-                </div>
+
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Email ID</label>
