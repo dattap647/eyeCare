@@ -1,7 +1,7 @@
 import { Box, styled, Typography, Link } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-import CustomButton from "../../CustomButton/CustomButton";
+import CustomButton from "../../CustomButtom/CustomButton";
 import Navbar from "../Navbar/NavBar";
 
 import doctor from "../../../assets/doctor.png";

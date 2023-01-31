@@ -50,7 +50,6 @@ const Services = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#E6F0FF",
       }}
     >
       {/* //Green Line */}

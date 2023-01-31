@@ -16,7 +16,6 @@ import {
   FormHelperText,
   styled,
   Alert,
-  Box,
 } from "@mui/material";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -114,7 +113,7 @@ const Signup = () => {
   const marginTop = { marginTop: 5 };
 
   return (
-    <Box backgroundColor="#E6F0FF">
+    <>
       <Navbar />
       <Grid display="inline-flex">
         <PaperContainer elevation={10}>
@@ -347,7 +346,7 @@ const Signup = () => {
         </PaperContainer>
       </Grid>
       <Footer />
-    </Box>
+    </>
   );
 };
 

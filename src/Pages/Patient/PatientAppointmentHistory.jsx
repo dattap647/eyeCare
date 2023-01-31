@@ -1,11 +1,10 @@
 import { Grid, Paper, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-import PatientForm from "./PatientForm";
 
 import usestyle from "./style";
 
-function PatientAppointment() {
+function PatientAppointmentHistory() {
   const useStyle = usestyle();
   return (
     <>
@@ -18,12 +17,10 @@ function PatientAppointment() {
               color="primary"
               style={useStyle.cardTitle}
             >
-              Create an Appointment
+              My Appointments
             </Typography>
 
-            <Paper style={useStyle.paperContent}>
-              <PatientForm />
-            </Paper>
+            <Paper style={useStyle.paperContent}> No Record Found!</Paper>
           </Grid>
         </Grid>
       </Container>
@@ -31,4 +28,4 @@ function PatientAppointment() {
   );
 }
 
-export default PatientAppointment;
+export default PatientAppointmentHistory;
