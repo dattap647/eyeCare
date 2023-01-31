@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-function PatientForm() {
-  const [doctor, setDoctor] = useState("");
+function PatientBooking() {
+  const navigate = useNavigate();
 
   const names = ["Dr. Dhagde", "Dr. Jadhav"];
   const initialValues = {
@@ -50,21 +51,36 @@ function PatientForm() {
     margin: "5px",
     backgroundColor: "#5c6",
     border: "1px solid green",
+    "&:hover": {
+      backgroundColor: "white",
+    },
   }));
 
   const handleSubmit = (values, props) => {
-    console.log(values);
+    console.log(values.doctorSelection);
     // setTimeout(() => {
     //   props.resetForm();
     //   props.setSubmitting(false);
     // }, 2000);
+
+    navigate("/patient/booking-confirmed", {
+      state: {
+        doc: values.doctorSelection,
+        datetime: values.datetime,
+      },
+    });
   };
 
   return (
-    <Container color="primary">
+    <Container>
       <Grid container columnSpacing={2} rowSpacing={2}>
         <Grid item lg={7} md={12} sm={12} xs={12}>
-          <Paper elevation={3} sx={{ p: 2 }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 2,
+            }}
+          >
             <Typography variant="h5">Book Your Appointment</Typography>
             <Formik
               initialValues={initialValues}
@@ -204,7 +220,14 @@ function PatientForm() {
                     type="submit"
                     variant="contained"
                     disabled={props.isSubmitting}
-                    sx={{ backgroundColor: "#5c6" }}
+                    sx={{
+                      backgroundColor: "#5c6",
+                      "&:hover": {
+                        backgroundColor: "white",
+                        color: "#5c6",
+                        border: "2px solid #5c6",
+                      },
+                    }}
                   >
                     {props.isSubmitting ? "Loading" : "Book"}
                   </Button>
@@ -229,15 +252,15 @@ function PatientForm() {
                     <ChipBox label="10:00 AM" />
                     <ChipBox label="10:30 AM" />
                     <ChipBox label="11:00 AM" />
-                    <ChipBox label="12:00 AM" />
-                    <ChipBox label="12:30 AM" />
-                    <ChipBox label="01:00 AM" />
-                    <ChipBox label="01:30 AM" />
-                    <ChipBox label="04:30 AM" />
-                    <ChipBox label="05:00 AM" />
-                    <ChipBox label="05:30 AM" />
-                    <ChipBox label="06:00 AM" />
-                    <ChipBox label="06:30 AM" />
+                    <ChipBox label="12:00 PM" />
+                    <ChipBox label="12:30 PM" />
+                    <ChipBox label="01:00 PM" />
+                    <ChipBox label="01:30 PM" />
+                    <ChipBox label="04:30 PM" />
+                    <ChipBox label="05:00 PM" />
+                    <ChipBox label="05:30 PM" />
+                    <ChipBox label="06:00 PM" />
+                    <ChipBox label="06:30 PM" />
                   </Box>
                 </Stack>
                 <Stack>
@@ -248,15 +271,15 @@ function PatientForm() {
                     <ChipBox label="10:00 AM" />
                     <ChipBox label="10:30 AM" />
                     <ChipBox label="11:00 AM" />
-                    <ChipBox label="12:00 AM" />
-                    <ChipBox label="12:30 AM" />
-                    <ChipBox label="01:00 AM" />
-                    <ChipBox label="01:30 AM" />
-                    <ChipBox label="04:30 AM" />
-                    <ChipBox label="05:00 AM" />
-                    <ChipBox label="05:30 AM" />
-                    <ChipBox label="06:00 AM" />
-                    <ChipBox label="06:30 AM" />
+                    <ChipBox label="12:00 PM" />
+                    <ChipBox label="12:30 PM" />
+                    <ChipBox label="01:00 PM" />
+                    <ChipBox label="01:30 PM" />
+                    <ChipBox label="04:30 PM" />
+                    <ChipBox label="05:00 PM" />
+                    <ChipBox label="05:30 PM" />
+                    <ChipBox label="06:00 PM" />
+                    <ChipBox label="06:30 PM" />
                   </Box>
                 </Stack>
               </Stack>
@@ -268,4 +291,4 @@ function PatientForm() {
   );
 }
 
-export default PatientForm;
+export default PatientBooking;

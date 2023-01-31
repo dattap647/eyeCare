@@ -1,29 +1,22 @@
 import {
-  ConnectWithoutContactOutlined,
-  ContactPageRounded,
-  HistoryEduRounded,
-  LocalHospitalRounded,
-} from "@mui/icons-material";
-import {
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
   Container,
   Grid,
-  IconButton,
   styled,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import ContactusDialog from "./ContactUs.jsx";
+import React from "react";
+
 import doctor from "../../assets/login.png";
+import pres from "../../assets/prescriptions.png";
+import appoint from "../../assets/appointment.png";
+import record from "../../assets/records.png";
+import bill from "../../assets/billing.png";
+
 import { Link } from "react-router-dom";
 
 function PatientDashboard() {
-  const [confirmDialog, setConfirmDialog] = useState(false);
-
   const ImageBox = styled(Box)(({ theme }) => ({
     display: "center",
 
@@ -57,10 +50,6 @@ function PatientDashboard() {
     },
   }));
 
-  const handleDialog = () => {
-    console.log(confirmDialog);
-    setConfirmDialog(!confirmDialog);
-  };
   return (
     <React.Fragment>
       <Container>
@@ -102,7 +91,11 @@ function PatientDashboard() {
                     </Typography>
                   </Box>
 
-                  <img src={doctor} alt="dotor" style={{ width: "40%" }} />
+                  <img
+                    src={appoint}
+                    alt="dotor"
+                    style={{ width: "40%", backgroundColor: "transparent" }}
+                  />
                 </CustomButton2>
               </Grid>
               <Grid item xs={11} sm={6} md={6} lg={6}>
@@ -120,7 +113,7 @@ function PatientDashboard() {
                       </Typography>
                     </Box>
 
-                    <img src={doctor} alt="dotor" style={{ width: "40%" }} />
+                    <img src={pres} alt="dotor" style={{ width: "40%" }} />
                   </Box>
                 </CustomButton2>
               </Grid>
@@ -139,7 +132,7 @@ function PatientDashboard() {
                       </Typography>
                     </Box>
 
-                    <img src={doctor} alt="dotor" style={{ width: "40%" }} />
+                    <img src={record} alt="dotor" style={{ width: "60%" }} />
                   </Box>
                 </CustomButton2>
               </Grid>
@@ -158,18 +151,14 @@ function PatientDashboard() {
                       </Typography>
                     </Box>
 
-                    <img src={doctor} alt="dotor" style={{ width: "40%" }} />
+                    <img src={bill} alt="dotor" style={{ width: "40%" }} />
                   </Box>
                 </CustomButton2>
               </Grid>
             </Grid>
-
-            {/* Card for Basic Patient Feature */}
           </Box>
         </CustomBox>
       </Container>
-
-      <ContactusDialog opendialog={confirmDialog} setopen={setConfirmDialog} />
     </React.Fragment>
   );
 }

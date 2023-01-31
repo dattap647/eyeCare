@@ -1,11 +1,8 @@
-import { Grid, Paper, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Paper } from "@mui/material";
 import React from "react";
 import user from "../../assets/user_icon.png";
-import usestyle from "./style";
 
 function PatientRcords() {
-  const useStyle = usestyle();
   return (
     <Paper elevation={5} sx={{ padding: "10px", margin: "0 auto" }}>
       <div className="card card-table mb-0">
@@ -49,11 +46,11 @@ function PatientRcords() {
                   </td>
                   <td className="text-right">
                     <div className="table-action">
-                      <a href="j;" className="btn btn-sm bg-info-light">
-                        <i className="far fa-eye"></i> View
+                      <a href="j" class="btn btn-sm bg-primary-light mx-2">
+                        <i class="fas fa-print"></i> Print
                       </a>
-                      <a href="javas;" className="btn btn-sm bg-primary-light">
-                        <i className="fas fa-print"></i> Print
+                      <a href="jav" class="btn btn-sm bg-info-light mx-2">
+                        <i class="far fa-eye"></i> View
                       </a>
                     </div>
                   </td>

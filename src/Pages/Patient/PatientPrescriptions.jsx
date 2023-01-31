@@ -3,7 +3,6 @@ import { Paper } from "@mui/material";
 import React from "react";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import user from "../../assets/user_icon.png";
-import usestyle from "./style";
 
 function PatientPrescriptions() {
   return (
@@ -40,12 +39,12 @@ function PatientPrescriptions() {
                       <a href="doctor-profile.html">Dr. Darren Elder</a>
                     </h2>
                   </td>
-                  <td class="text-right">
+                  <td class="text-right ">
                     <div class="table-action">
-                      <a href="j" class="btn btn-sm bg-primary-light">
+                      <a href="j" class="btn btn-sm bg-primary-light mx-2">
                         <i class="fas fa-print"></i> Print
                       </a>
-                      <a href="jav" class="btn btn-sm bg-info-light">
+                      <a href="jav" class="btn btn-sm bg-info-light mx-2">
                         <i class="far fa-eye"></i> View
                       </a>
                     </div>

@@ -1,14 +1,11 @@
-import { Box, Grid, Link, Paper, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Box, Link, Paper } from "@mui/material";
+
 import React from "react";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import PatientForm from "./PatientForm";
+
 import user from "../../assets/user_icon.png";
 
-import usestyle from "./style";
-
 function PatientAppointment() {
-  const useStyle = usestyle();
   return (
     <>
       <Paper elevation={5} sx={{ padding: "10px", margin: "0 auto" }}>
@@ -52,7 +49,7 @@ function PatientAppointment() {
                               alt="UserImage"
                             />
                           </a>
-                          <a href="doctor-profile.html">Dr. Ruby Perrin</a>
+                          <a href="doctor-profile">Dr. Ruby Perrin</a>
                         </h2>
                       </td>
                       <td>
@@ -69,11 +66,11 @@ function PatientAppointment() {
                       </td>
                       <td className="text-right">
                         <div className="table-action">
-                          <a href="#" className="btn btn-sm bg-primary-light">
-                            <i className="fas fa-print"></i> Print
+                          <a href="j" class="btn btn-sm bg-primary-light mx-2">
+                            <i class="fas fa-print"></i> Print
                           </a>
-                          <a href="#" className="btn btn-sm bg-info-light">
-                            <i className="far fa-eye"></i> View
+                          <a href="jav" class="btn btn-sm bg-info-light mx-2">
+                            <i class="far fa-eye"></i> View
                           </a>
                         </div>
                       </td>

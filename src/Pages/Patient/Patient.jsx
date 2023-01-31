@@ -4,9 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import UpdateProfile from "../../components/UpdateProfile/UpdateProfile";
 import PageNotFound from "../404/404";
+import ConfirmBooking from "./ConfirmBooking";
+
 import PatientAppointment from "./PatientAppointment";
+import PatientBooking from "./PatientBooking";
 import PatientDashboard from "./PatientDashboard";
-import PatientForm from "./PatientForm";
 
 import PatientPrescriptions from "./PatientPrescriptions";
 import PatientRcords from "./PatientRecords";
@@ -51,7 +53,11 @@ function Patient() {
       />
       <Route
         path="/booking"
-        element={<Dashboard children={<PatientForm />} />}
+        element={<Dashboard children={<PatientBooking />} />}
+      />
+      <Route
+        path="/booking-confirmed"
+        element={<Dashboard children={<ConfirmBooking />} />}
       />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
