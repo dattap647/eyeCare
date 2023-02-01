@@ -14,23 +14,28 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 function ConfirmBooking() {
   //to access the dr and time for appointment
   const state = useLocation();
+  const { doc, datetime } = state.state;
+  console.log(datetime);
+
+  const date = datetime.split("T")[0];
+  const time = datetime.split("T")[1];
 
   return (
     <Container>
       <Box
         justifyContent="center"
-        width={360}
+        width={400}
         height="50%"
         margin="8px auto"
         padding="8px auto"
-        bgImage="linear-gradient(to right, red , yellow)"
       >
         <Card>
-          <CardContent>
-            <img src={tick} alt="tick" width="15%" />
+          <img src={tick} alt="tick" width="15%" style={{ margin: "8px" }} />
+          <CardContent sx={{ my: 1 }}>
             <p>
-              Appointment booked with <strong>{state.state.doc}</strong>
-              <br></br> on <strong>{state.state.datetime}</strong>
+              Appointment booked with <strong>{doc}</strong>
+              <br></br> on <strong>{date}</strong>
+              <br></br>at <strong>{time}</strong>
             </p>
           </CardContent>
           <CardActions sx={{ display: "inline-block", my: 1 }}>

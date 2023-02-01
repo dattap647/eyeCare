@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 
 import {
   Button,
@@ -11,25 +12,31 @@ import {
   Typography,
 } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 function PatientBooking() {
-  const navigate = useNavigate();
-
-  const names = ["Dr. Dhagde", "Dr. Jadhav"];
   const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
-
     doctorSelection: "",
     datetime: "",
     phoneNumber: "",
     file: "",
   };
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+  const today = new Date();
+  const nextMonth = new Date();
+  nextMonth.setMonth(today.getMonth() + 1);
+
+  const names = ["Dr. Chulbuli Pandey", "Dr. Ajay Dhagde", "Dr. Singh Jadhav"];
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -57,11 +64,12 @@ function PatientBooking() {
   }));
 
   const handleSubmit = (values, props) => {
-    console.log(values.doctorSelection);
-    // setTimeout(() => {
-    //   props.resetForm();
-    //   props.setSubmitting(false);
-    // }, 2000);
+    // console.log(values.doctorSelection);
+    // console.log(values.datetime);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
 
     navigate("/patient/booking-confirmed", {
       state: {
@@ -185,24 +193,54 @@ function PatientBooking() {
                         ))}
                       </Field>
                     </FormControl>
+
                     <FormControl fullWidth>
-                      <Field
-                        as={TextField}
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker
+                          label="Appointment Timing"
+                          disablePast="true"
+                          maxDate={nextMonth}
+                          minTime={dayjs("2022-02-14T09:00")}
+                          maxTime={dayjs("2022-02-14T18:31")}
+                          value={value}
+                          onChange={(newValue) => {
+                            setValue(newValue);
+                            props.setFieldValue(
+                              "datetime",
+                              dayjs(newValue).format("YYYY-MM-DDTHH:mm A")
+                            );
+                          }}
+                          renderInput={(param) => (
+                            <TextField
+                              name="datetime"
+                              color="success"
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              {...param}
+                              helperText={
+                                <ErrorMessage
+                                  component="div"
+                                  style={{ color: "red" }}
+                                  name="datetime"
+                                />
+                              }
+                            />
+                          )}
+                        />
+                      </LocalizationProvider>
+                      {/* <TextField
                         name="datetime"
                         label="Next appointment"
                         type="datetime-local"
+                        defaultValue={new Date()}
+                        mindate={lastMonth}
+                        maxDate={nextMonth}
                         color="success"
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        helperText={
-                          <ErrorMessage
-                            component="div"
-                            style={{ color: "red" }}
-                            name="datetime"
-                          />
-                        }
-                      />
+                      */}
                     </FormControl>
                   </Stack>
 

@@ -15,6 +15,7 @@ import record from "../../assets/records.png";
 import bill from "../../assets/billing.png";
 
 import { Link } from "react-router-dom";
+import Teams from "../../components/HomePage/Team/Teams";
 
 function PatientDashboard() {
   const ImageBox = styled(Box)(({ theme }) => ({
@@ -31,6 +32,7 @@ function PatientDashboard() {
     alignItem: "center",
     gap: theme.spacing(5),
     marginTop: theme.spacing(3),
+
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       alignItems: "center",
@@ -159,6 +161,9 @@ function PatientDashboard() {
           </Box>
         </CustomBox>
       </Container>
+      <Box my={5}>
+        <Teams />
+      </Box>
     </React.Fragment>
   );
 }

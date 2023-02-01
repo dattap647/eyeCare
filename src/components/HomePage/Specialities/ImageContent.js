@@ -1,10 +1,10 @@
-import img1 from "../../../assets/eyetest.png";
+import img1 from "../../../assets/eyetest.jpg";
 import img2 from "../../../assets/lasik.png";
-import img3 from "../../../assets/retina.png";
+import img3 from "../../../assets/Waveligh.jpg";
 
 const Content = [
   {
-    tittle: "Eye test",
+    tittle: "Eye Test",
     imgPath: img1,
     bodyText: "Advacnce Eye Check up Machine",
   },
