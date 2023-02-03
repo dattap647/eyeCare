@@ -278,13 +278,13 @@ table.table td h2 span {
 }
 .bg-primary,
 .badge-primary {
-  background-color: #09e5ab !important;
+  background-color: #5c6 !important;
 }
 a.bg-primary:focus,
 a.bg-primary:hover,
 button.bg-primary:focus,
 button.bg-primary:hover {
-  background-color: #09dca4 !important;
+  background-color: "white" !important;
 }
 .bg-success,
 .badge-success {

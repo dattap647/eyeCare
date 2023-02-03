@@ -229,18 +229,6 @@ function PatientBooking() {
                           )}
                         />
                       </LocalizationProvider>
-                      {/* <TextField
-                        name="datetime"
-                        label="Next appointment"
-                        type="datetime-local"
-                        defaultValue={new Date()}
-                        mindate={lastMonth}
-                        maxDate={nextMonth}
-                        color="success"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      */}
                     </FormControl>
                   </Stack>
 
