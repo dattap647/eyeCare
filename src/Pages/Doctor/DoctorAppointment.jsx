@@ -1,26 +1,23 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-
+import Sidebar from "../../components/Profile/Doctor/Sidebar";
+import AppointmentTable from "../../components/Tables/Prescriptions/AppointmentTable";
 import usestyle from "./style";
 
 function DoctorAppointment() {
   const useStyle = usestyle();
   return (
     <>
-      <Container style={useStyle.container} sx={{ py: 4 }} maxWidth="m">
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Typography
-              component="h1"
-              variant="h4"
-              color="primary"
-              style={useStyle.cardTitle}
-            >
-              Appointments
-            </Typography>
-
-            <Paper style={useStyle.paperContent}> No Record Found!</Paper>
+      <Container style={useStyle.container} sx={{}} maxWidth="m">
+        <Grid container columnSpacing={2} rowSpacing={2}>
+          <Grid item lg={3} md={12} sm={12}>
+            <Sidebar />
+          </Grid>
+          <Grid item lg={9}>
+            <Box sx={{ height: "100%" }}>
+              <AppointmentTable />
+            </Box>
           </Grid>
         </Grid>
       </Container>

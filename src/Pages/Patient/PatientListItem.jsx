@@ -43,14 +43,5 @@ export const mainListItems = (
         <ListItemText primary="My Appointment" />
       </ListItem>
     </Tooltip>
-
-    {/* <Tooltip title="Prescriptions">
-      <ListItem button component={Link} to="/patient/prescriptions">
-        <ListItemIcon>
-          <GiIcons.GiPill className="reactIcon" />
-        </ListItemIcon>
-        <ListItemText primary="Prescriptions" />
-      </ListItem>
-    </Tooltip> */}
   </div>
 );

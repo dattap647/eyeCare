@@ -25,6 +25,7 @@ import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import Navbar from "../../HomePage/Navbar/NavBar";
 import Footer from "../../HomePage/Footer/Footer";
+import axios from "axios";
 
 const DrSignup = () => {
   const navigate = useNavigate();
@@ -70,25 +71,25 @@ const DrSignup = () => {
   });
 
   const handleSubmit = async (values, props) => {
-    console.log("I'm xubmitted");
-
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
+    console.log("I'm submitted");
 
-    try {
-      setError("");
-      setLoading(true);
-      console.log(values);
-      // axios.post("", values).then((res) => {
-      //   console.log(res);
-      // });
-
-      // navigate("/signin");
-    } catch (error) {
-      setError("Failed to create an account");
-    }
+    axios
+      .post("http://localhost:8080/doctor")
+      .then((res) => {
+        console.log(res);
+        setError("");
+        setLoading(true);
+        console.log(values);
+        navigate("/doctor/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("User Already exist");
+      });
   };
   const PaperContainer = styled(Paper)(({ theme }) => ({
     padding: 20,

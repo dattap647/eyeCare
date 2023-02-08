@@ -34,34 +34,25 @@ function SignIn() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = (values, props) => {
-    console.log("I'm xubmitted");
-
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
+    console.log("I'm submitted");
 
-    try {
-      setError("");
-      setLoading(true);
-      console.log(values);
-      navigate("/patient/dashboard");
-      // axios.post("", values).then((res) => {
-      //   console.log(res);
-      // });
-
-      // navigate("/signin");
-    } catch (error) {
-      setError("Failed to create an account");
-    }
-
-    // //   useEffect(() => {
-    // //     if (currentUser!== null){
-
-    // //     }
-
-    // //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // // }, [currentUser])
+    axios
+      .post("http://localhost:8080/login")
+      .then((res) => {
+        console.log(res);
+        setError("");
+        setLoading(true);
+        console.log(values);
+        navigate("/patient/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(`${error}`);
+      });
   };
 
   const validationSchema = Yup.object().shape({

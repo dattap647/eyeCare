@@ -16,7 +16,7 @@ function ConfirmBooking() {
   const state = useLocation();
   const { doc, datetime } = state.state;
   console.log(datetime);
-
+  //SPLIT DATE AND TIME
   const date = datetime.split("T")[0];
   const time = datetime.split("T")[1];
 

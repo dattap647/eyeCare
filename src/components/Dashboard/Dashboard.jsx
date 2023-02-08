@@ -1,21 +1,15 @@
-import {
-  AccountCircle,
-  ChevronLeft,
-  ExitToApp,
-  Menu,
-  Notifications,
-} from "@mui/icons-material";
-import { Alert, Box, Container, Grid, Typography } from "@mui/material";
+import { Alert, Box, Container, Grid } from "@mui/material";
 
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ConfirmDialog from "../confirmDialog/ConfirmDialog";
 import Footer from "../HomePage/Footer/Footer";
 import Navbar from "../HomePage/Navbar/NavBar";
 import Notification from "../Notification/Notification";
 
-function DashboardContent({ title, children, mainListItems }) {
+function DashboardContent({ children, mainListItems }) {
   const navigate = useNavigate();
+  const sideListItems = mainListItems;
   const [error, setError] = useState("");
   // const [openPopup, setOpenPopup]= useState(false);
   const [notify, setNotify] = useState({
@@ -56,7 +50,7 @@ function DashboardContent({ title, children, mainListItems }) {
 
   return (
     <>
-      <Navbar isAuth={true} />
+      <Navbar isAuth={true} sideListItems={sideListItems} />
       <Box>
         <Box
           component="main"
@@ -66,15 +60,15 @@ function DashboardContent({ title, children, mainListItems }) {
             overflow: "auto",
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+          <Container maxWidth="lg" sx={{ my: 1 }}>
+            <Box container>
               {error && (
                 <Alert severity="error" sx={{ my: 1, width: "100%" }}>
                   {error}
                 </Alert>
               )}
               {children}
-            </Grid>
+            </Box>
           </Container>
         </Box>
       </Box>
@@ -85,6 +79,6 @@ function DashboardContent({ title, children, mainListItems }) {
   );
 }
 
-export default function Dashboard({ title, children, mainListItems }) {
+export default function Dashboard({ children, mainListItems }) {
   return <DashboardContent children={children} mainListItems={mainListItems} />;
 }

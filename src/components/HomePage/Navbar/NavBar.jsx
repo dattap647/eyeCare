@@ -5,22 +5,22 @@ import { Container } from "@mui/system";
 import { Link as Links } from "react-router-dom";
 import { Drawer, IconButton, Link, List, styled } from "@mui/material";
 import { useState } from "react";
-import { mainListItems } from "./ListItem";
+
 import logo from "../../../assets/logo.png";
 import CustomButton from "../../CustomButton/CustomButton";
-import ProfileIconDropdown from "../../UpdateProfile/Profile";
-import Footer from "../Footer/Footer";
+import ProfileIconDropdown from "../../Profile/Patient/Profile";
+
 import Notification from "../../Notification/Notification";
 import { Notifications } from "@mui/icons-material";
 
-export const Navbar = (props) => {
-  const { isAuth } = props;
+export const NavbarContent = ({ isAuth, sideListItems }) => {
+  console.log({ sideListItems });
+
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
-  console.log(isAuth);
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -43,7 +43,7 @@ export const Navbar = (props) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>{mainListItems}</List>
+      {sideListItems}
     </Box>
   );
 
@@ -81,7 +81,7 @@ export const Navbar = (props) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: theme.spacing(5),
+    padding: theme.spacing(3),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(2),
     },
@@ -170,4 +170,7 @@ export const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default function Navbar({ isAuth, sideListItems }) {
+  console.log(sideListItems);
+  return <NavbarContent isAuth={isAuth} sideListItems={sideListItems} />;
+}

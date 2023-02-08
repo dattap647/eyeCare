@@ -1,56 +1,69 @@
+import React from "react";
+import { ListItem, ListItemIcon, List, ListItemText } from "@mui/material";
 import {
-  Assignment,
-  ContactPageRounded,
+  CalendarToday,
   Dashboard,
-  EventAvailable,
-  HistoryEduRounded,
+  HourglassEmpty,
+  Logout,
+  People,
+  PersonPin,
+  Receipt,
 } from "@mui/icons-material";
-import { ListItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
-  <div>
-    <Tooltip title="Dashboard">
-      <ListItem button component={Link} to="/doctor/dashboard">
+  <>
+    <List>
+      <ListItem component={Link} sx={{ color: "#5c6" }} to="/doctor">
         <ListItemIcon>
           <Dashboard />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
-    </Tooltip>
-
-    <Tooltip title=" Appointment">
-      <ListItem button component={Link} to="/doctor/appointment">
+      <ListItem
+        component={Link}
+        sx={{ color: "#5c6" }}
+        to="/doctor/appointments"
+      >
         <ListItemIcon>
-          <EventAvailable />
+          <CalendarToday />
         </ListItemIcon>
-        <ListItemText primary="Appointment" />
+        <ListItemText primary="Appointments" />
       </ListItem>
-    </Tooltip>
-
-    <Tooltip title="Prescription">
-      <ListItem button component={Link} to="/doctor/prescription">
+      {/* <ListItem
+        component={Link}
+        sx={{ color: "#5c6" }}
+        to="/doctor/my-patients"
+      >
         <ListItemIcon>
-          <ContactPageRounded />
+          <People />
         </ListItemIcon>
-        <ListItemText primary="Prescription" />
-      </ListItem>
-    </Tooltip>
-    <Tooltip title="Records">
-      <ListItem button component={Link} to="/doctor/records">
+        <ListItemText primary="My Patients" />
+      </ListItem> */}
+      <ListItem component={Link} sx={{ color: "#5c6" }} to="/doctor/timing">
         <ListItemIcon>
-          <HistoryEduRounded />
+          <HourglassEmpty />
         </ListItemIcon>
-        <ListItemText primary="Records" />
+        <ListItemText primary="Schedule Timings" />
       </ListItem>
-    </Tooltip>
-    <Tooltip title="Form">
-      <ListItem button component={Link} to="/doctor/edit-form">
+      <ListItem component={Link} sx={{ color: "#5c6" }} to="/doctor/invoice">
         <ListItemIcon>
-          <Assignment />
+          <Receipt />
         </ListItemIcon>
-        <ListItemText primary="Edit Form" />
+        <ListItemText primary="Invoice" />
       </ListItem>
-    </Tooltip>
-  </div>
+      <ListItem component={Link} sx={{ color: "#5c6" }} to="/doctor/profile">
+        <ListItemIcon>
+          <PersonPin />
+        </ListItemIcon>
+        <ListItemText primary="Profile" />
+      </ListItem>
+      <ListItem component={Link} sx={{ color: "#5c6" }} to="/doctor/profile">
+        <ListItemIcon>
+          <Logout />
+        </ListItemIcon>
+        <ListItemText primary="Log out" />
+      </ListItem>
+    </List>
+  </>
 );

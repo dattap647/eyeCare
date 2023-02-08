@@ -1,6 +1,6 @@
 import React from "react";
 
-import user from "../../assets/user_icon.png";
+import user from "../../../assets/user_icon.png";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 
