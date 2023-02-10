@@ -1,20 +1,15 @@
 import React from "react";
 import { Navigate, Route } from "react-router-dom";
+import SignIn from "../../components/Auth/SignIn/SignIn";
 import { useAuth } from "../../Context/Authcontext";
 
-function DoctorRoutes({ element: Element, ...rest }) {
+function DoctorRoutes({ component: Components }) {
   const { currentUser } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        return currentUser !== null && currentUser?.role ? (
-          <Element {...props} />
-        ) : (
-          <Navigate to="/patient" />
-        );
-      }}
-    />
+
+  return currentUser !== null && currentUser?.role ? (
+    <Components />
+  ) : (
+    <SignIn />
   );
 }
 

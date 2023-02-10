@@ -88,9 +88,5 @@ export default function AuthProvider({ children }) {
     checkLoggedIn();
   }, []);
 
-  return (
-    <AuthContext.Provider value={value}>
-      {currentUser?.token ? { children } : <SignIn />}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

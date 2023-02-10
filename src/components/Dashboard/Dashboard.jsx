@@ -2,6 +2,7 @@ import { Alert, Box, Container, Grid } from "@mui/material";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/Authcontext";
 import ConfirmDialog from "../confirmDialog/ConfirmDialog";
 import Footer from "../HomePage/Footer/Footer";
 import Navbar from "../HomePage/Navbar/NavBar";
@@ -10,6 +11,7 @@ import Notification from "../Notification/Notification";
 function DashboardContent({ children, mainListItems }) {
   const navigate = useNavigate();
   const sideListItems = mainListItems;
+  const { currentUser } = useAuth();
   const [error, setError] = useState("");
   // const [openPopup, setOpenPopup]= useState(false);
   const [notify, setNotify] = useState({
@@ -50,7 +52,7 @@ function DashboardContent({ children, mainListItems }) {
 
   return (
     <>
-      <Navbar isAuth={true} sideListItems={sideListItems} />
+      <Navbar isAuth={currentUser} sideListItems={sideListItems} />
       <Box>
         <Box
           component="main"

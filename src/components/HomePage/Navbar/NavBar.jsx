@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container } from "@mui/system";
 import { Link as Links } from "react-router-dom";
-import { Drawer, IconButton, Link, List, styled } from "@mui/material";
+import { Drawer, IconButton, Link, styled } from "@mui/material";
 import { useState } from "react";
 
 import logo from "../../../assets/logo.png";
