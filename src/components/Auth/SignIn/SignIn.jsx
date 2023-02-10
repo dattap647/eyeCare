@@ -24,8 +24,10 @@ import Navbar from "../../HomePage/Navbar/NavBar";
 import Footer from "../../HomePage/Footer/Footer";
 import { Box, Stack } from "@mui/system";
 
+import { useAuth } from "../../../Context/Authcontext";
 function SignIn() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const initialValues = {
     email: "",
     password: "",
@@ -33,26 +35,35 @@ function SignIn() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleSubmit = (values, props) => {
+  const handleSubmit = async (values, props) => {
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
     console.log("I'm submitted");
 
-    axios
-      .post("http://localhost:8080/login")
-      .then((res) => {
-        console.log(res);
-        setError("");
-        setLoading(true);
-        console.log(values);
-        navigate("/patient/dashboard");
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(`${error}`);
-      });
+    try {
+      await login(values);
+      navigate("/patient");
+    } catch (error) {
+      console.error("error", error);
+      console.log(error);
+      setError(`${error}`);
+    }
+
+    // axios
+    //   .post("http://localhost:8080/login")
+    //   .then((res) => {
+    //     console.log(res);
+    //     setError("");
+    //     setLoading(true);
+    //     console.log(values);
+    //     navigate("/patient/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setError(`${error}`);
+    //   });
   };
 
   const validationSchema = Yup.object().shape({

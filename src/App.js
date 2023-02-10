@@ -10,26 +10,36 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import PageNotFound from "./Pages/404/404";
 
 import Home from "./Pages/Home/Home";
-import PrivateDoctorRoute from "./Routes/Doctors/DoctorRoutes";
-import PrivatePatientRoute from "./Routes/Patients/PatientRoute";
+import DoctorRoute from "./Routes/Doctors/DoctorRoutes";
+import PatientRoute from "./Routes/Patients/PatientRoute";
 import Terms from "./Pages/Term&Conditions/Terms";
+import Doctors from "./Pages/Doctor/Doctors";
+import Patient from "./Pages/Patient/Patient";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signup-doctor" element={<DrSignup />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/terms-&-conditions" element={<Terms />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/patient/*" element={<PrivatePatientRoute />} />
-        <Route path="/doctor/*" element={<PrivateDoctorRoute />} />
+      <AuthProvider>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup-doctor" element={<DrSignup />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/terms-&-conditions" element={<Terms />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route
+            path="/patient/*"
+            element={<PatientRoute element={<Patient />} />}
+          />
+          <Route
+            path="/doctor/*"
+            element={<DoctorRoute element={<Doctors />} />}
+          />
 
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

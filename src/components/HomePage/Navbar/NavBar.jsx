@@ -129,7 +129,7 @@ export const NavbarContent = ({ isAuth, sideListItems }) => {
           <NavLink variant="body2" component={Links} to="/terms-&-conditions">
             About Us
           </NavLink>
-          <NavLink variant="body2" component={Links} to="">
+          <NavLink variant="body2" component={Links} to="/footer">
             Contact Us
           </NavLink>
         </NavbarLinksBox>

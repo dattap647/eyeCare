@@ -1,10 +1,32 @@
 import axios from "axios";
 import React, { useState, useContext, useEffect } from "react";
+import SignIn from "../components/Auth/SignIn/SignIn";
 
 const AuthContext = React.createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
+
+const login = async ({ email, password }) => {
+  const res = await axios.post("http://localhost:8080/login", {
+    email,
+    password,
+  });
+
+  const token = res.data.token;
+  if (token) {
+    localStorage.setItem("user", JSON.stringify(res.data));
+  }
+  return res.data;
+};
+
+const isAuthenticated = () => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    return {};
+  }
+  return JSON.parse(user);
+};
 
 const signup = async (props) => {
   return axios.post("", props).then((res) => {
@@ -18,24 +40,11 @@ const signup = async (props) => {
 const drsignup = async (props) => {
   axios.post("", props).then((res) => {
     console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
-  });
-};
-
-const login = (email, password) => {
-  axios.post("", { email, password }).then((res) => {
-    console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
   });
 };
 
 const logout = () => {
-  //logout function
-  return;
+  localStorage.removeItem("user");
 };
 
 const resetPassword = (email) => {
@@ -65,18 +74,23 @@ export default function AuthProvider({ children }) {
     drsignup,
   };
 
-  //   useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //       setCurrentUser(user);
-  //       setLoading(false);
-  //     });
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let cuser = isAuthenticated();
+      if (cuser === null) {
+        localStorage.removeItem("user");
+        cuser = "";
+      }
 
-  //     return unsubscribe;
-  //   }, []);
+      setCurrentUser(cuser);
+      setLoading(false);
+    };
+    checkLoggedIn();
+  }, []);
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {currentUser?.token ? { children } : <SignIn />}
     </AuthContext.Provider>
   );
 }

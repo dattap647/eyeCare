@@ -1,12 +1,21 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-import { Patient } from "../../Pages";
+import { Navigate, Route } from "react-router-dom";
+import { useAuth } from "../../Context/Authcontext";
 
-export const PrivatePatientRoute = () => {
-  //check the login details
-  const isAuthenticated = true;
+function PatientRoute({ element: Element, ...rest }) {
+  const { currentUser } = useAuth;
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return currentUser !== null && currentUser?.role ? (
+          <Element {...props} />
+        ) : (
+          <Navigate to="/signin" />
+        );
+      }}
+    />
+  );
+}
 
-  return isAuthenticated ? <Patient /> : <Navigate to="/" />;
-};
-
-export default PrivatePatientRoute;
+export default PatientRoute;

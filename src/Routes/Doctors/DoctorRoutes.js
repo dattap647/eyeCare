@@ -1,12 +1,21 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-import Doctors from "../../Pages/Doctor/Doctors";
+import { Navigate, Route } from "react-router-dom";
+import { useAuth } from "../../Context/Authcontext";
 
-export const PrivateDoctorRoute = () => {
-  //check the login details
-  const isAuthenticated = true;
+function DoctorRoutes({ element: Element, ...rest }) {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return currentUser !== null && currentUser?.role ? (
+          <Element {...props} />
+        ) : (
+          <Navigate to="/patient" />
+        );
+      }}
+    />
+  );
+}
 
-  return isAuthenticated ? <Doctors /> : <Navigate to="/" />;
-};
-
-export default PrivateDoctorRoute;
+export default DoctorRoutes;
