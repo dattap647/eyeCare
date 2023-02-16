@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useContext, useEffect } from "react";
-import SignIn from "../components/Auth/SignIn/SignIn";
 
 const AuthContext = React.createContext();
 export function useAuth() {
@@ -8,13 +7,23 @@ export function useAuth() {
 }
 
 const login = async ({ email, password }) => {
-  const res = await axios.post("http://localhost:8080/login", {
+  return await axios.get("https://reqres.in/api/users/2", {
     email,
     password,
   });
 
+  // const token = res.data.token;
+  // if (token) {
+  //   localStorage.setItem("user", JSON.stringify(res.data));
+  // }
+  // return res.data;
+};
+
+const setUser = (res) => {
   const token = res.data.token;
-  if (token) {
+
+  // if (token)
+  if (true) {
     localStorage.setItem("user", JSON.stringify(res.data));
   }
   return res.data;
@@ -31,9 +40,6 @@ const isAuthenticated = () => {
 const signup = async (props) => {
   return axios.post("", props).then((res) => {
     console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
   });
 };
 
@@ -66,6 +72,8 @@ export default function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
+    isAuthenticated,
+    setUser,
     signup,
     logout,
     resetPassword,
@@ -88,5 +96,9 @@ export default function AuthProvider({ children }) {
     checkLoggedIn();
   }, []);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }

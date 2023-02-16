@@ -16,7 +16,7 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 
 import doctor from "../../../assets/login.png";
-import axios from "axios";
+
 import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 
@@ -27,15 +27,14 @@ import { Box, Stack } from "@mui/system";
 import { useAuth } from "../../../Context/Authcontext";
 function SignIn() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, setUser } = useAuth();
   const initialValues = {
     email: "",
     password: "",
   };
-
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const handleSubmit = async (values, props) => {
+    let res = "";
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
@@ -43,12 +42,16 @@ function SignIn() {
     console.log("I'm submitted");
 
     try {
-      await login(values);
+      res = await login(values);
+      setUser(res);
+      setError("");
       navigate("/patient");
     } catch (error) {
-      console.error("error", error);
-      console.log(error);
-      setError(`${error}`);
+      if (res.status === 400 || res.status === 404) {
+        setError(error.res.data.message);
+      } else {
+        setError("Something Went Wrong!!!");
+      }
     }
 
     // axios

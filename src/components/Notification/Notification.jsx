@@ -1,15 +1,12 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Slide, Snackbar } from "@mui/material";
 import React from "react";
 
-const useStyles = () => ({
-  root: {
-    top: 9,
-  },
-});
+function SlideTransition(props) {
+  return <Slide {...props} direction="down" />;
+}
 
 function Notification(props) {
   const { notify, setNotify } = props;
-  const classes = useStyles();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -24,13 +21,13 @@ function Notification(props) {
 
   return (
     <Snackbar
-      style={classes.root}
       open={notify.isOpen}
       autoHideDuration={2500}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      TransitionComponent={SlideTransition}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={handleClose}
     >
-      <Alert severity={notify.type} onClose={handleClose}>
+      <Alert severity={notify.type} onClose={handleClose} sx={{ width: 400 }}>
         {notify.message}
       </Alert>
     </Snackbar>

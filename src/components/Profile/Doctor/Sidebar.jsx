@@ -1,8 +1,7 @@
 import React from "react";
 import doctor from "../../../assets/doctor2.jpg";
 import { Box, Typography, styled, Paper, Avatar } from "@mui/material";
-
-import { mainListItems } from "../../../Pages/Doctor/DoctorItemList";
+import MainListItems from "../../../Pages/Doctor/MainListItems";
 
 function Sidebar() {
   const ProfileSideBar = styled(Box)(({ theme }) => ({
@@ -55,7 +54,7 @@ function Sidebar() {
             },
           }}
         >
-          {mainListItems}
+          <MainListItems />
         </Box>
       </ProfileSideBar>
     </Paper>

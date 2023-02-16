@@ -8,7 +8,7 @@ import DoctorAppointment from "./DoctorAppointment";
 import DoctorAppointmentRecords from "./DoctorAppointmentRecords";
 import EditForm from "./EditForm";
 import PageNotFound from "../404/404";
-import { mainListItems } from "./DoctorItemList";
+import MainListItems from "./MainListItems";
 
 function Doctors() {
   return (
@@ -20,7 +20,7 @@ function Doctors() {
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorDashboard />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -30,7 +30,7 @@ function Doctors() {
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorDashboard />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -40,7 +40,7 @@ function Doctors() {
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorAppointment />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -49,7 +49,7 @@ function Doctors() {
         element={
           <Dashboard
             children={<DoctorPrescription />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -58,14 +58,17 @@ function Doctors() {
         element={
           <Dashboard
             children={<DoctorAppointmentRecords />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
       <Route
         path="/edit-form"
         element={
-          <Dashboard children={<EditForm />} mainListItems={mainListItems} />
+          <Dashboard
+            children={<EditForm />}
+            mainListItems={<MainListItems />}
+          />
         }
       />
       <Route path="*" element={<PageNotFound />} />

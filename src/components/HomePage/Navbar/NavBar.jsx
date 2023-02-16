@@ -14,13 +14,18 @@ import Notification from "../../Notification/Notification";
 import { Notifications } from "@mui/icons-material";
 
 export const NavbarContent = ({ isAuth, sideListItems }) => {
-  console.log({ sideListItems });
-
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
+  const handleNotify = () => {
+    setNotify({
+      isOpen: true,
+      message: "No Notification",
+      type: "info",
+    });
+  };
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -146,7 +151,7 @@ export const NavbarContent = ({ isAuth, sideListItems }) => {
         {isAuth ? (
           <>
             <ProfileIconDropdown />
-            <IconButton onClick={setNotify}>
+            <IconButton onClick={handleNotify}>
               <Notifications />
             </IconButton>
           </>
@@ -171,6 +176,5 @@ export const NavbarContent = ({ isAuth, sideListItems }) => {
 };
 
 export default function Navbar({ isAuth, sideListItems }) {
-  console.log(sideListItems);
   return <NavbarContent isAuth={isAuth} sideListItems={sideListItems} />;
 }

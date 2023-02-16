@@ -1,15 +1,17 @@
 import React from "react";
-import { Navigate, Route } from "react-router-dom";
-import SignIn from "../../components/Auth/SignIn/SignIn";
-import { useAuth } from "../../Context/Authcontext";
+import { Navigate } from "react-router-dom";
 
-function PatientRoute({ component: Components }) {
+import { useAuth } from "../../Context/Authcontext";
+import Patient from "../../Pages/Patient/Patient";
+
+function PatientRoute() {
   const { currentUser } = useAuth;
-  console.log("hello");
-  return currentUser !== null && !currentUser?.role ? (
-    <Components />
+  console.log(currentUser);
+
+  return currentUser !== null && currentUser.role ? (
+    <Navigate to="/doctor" replace />
   ) : (
-    <SignIn />
+    <Patient />
   );
 }
 

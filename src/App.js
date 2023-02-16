@@ -13,8 +13,6 @@ import Home from "./Pages/Home/Home";
 import DoctorRoute from "./Routes/Doctors/DoctorRoutes";
 import PatientRoute from "./Routes/Patients/PatientRoute";
 import Terms from "./Pages/Term&Conditions/Terms";
-import Doctors from "./Pages/Doctor/Doctors";
-import Patient from "./Pages/Patient/Patient";
 
 function App() {
   return (
@@ -28,14 +26,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/terms-&-conditions" element={<Terms />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route
-            path="/patient/*"
-            element={<PatientRoute element={<Patient />} />}
-          />
-          <Route
-            path="/doctor/*"
-            element={<DoctorRoute element={<Doctors />} />}
-          />
+          <Route path="/patient/*" element={<PatientRoute />} />
+          <Route path="/doctor/*" element={<DoctorRoute />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
