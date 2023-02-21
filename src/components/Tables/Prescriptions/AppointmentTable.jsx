@@ -62,7 +62,12 @@ function AppointmentTable() {
                     alignItem: "center",
                   }}
                 >
-                  <Button variant="outlined" color="primary" sx={{ m: 1 }}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    sx={{ m: 1 }}
+                    href="/doctor/patient-details"
+                  >
                     View
                   </Button>
                   <Button

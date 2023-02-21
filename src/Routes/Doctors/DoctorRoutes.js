@@ -6,8 +6,8 @@ import Doctors from "../../Pages/Doctor/Doctors";
 function DoctorRoutes() {
   console.log("hello doctor");
   const { currentUser } = useAuth();
-
-  return currentUser !== null ? <SignIn /> : <Doctors />;
+  return <Doctors />;
+  // return currentUser !== null && currentUser?.role ? <Doctors /> : <SignIn />;
 }
 
 export default DoctorRoutes;

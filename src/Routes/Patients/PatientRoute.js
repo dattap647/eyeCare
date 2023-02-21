@@ -7,12 +7,12 @@ import Patient from "../../Pages/Patient/Patient";
 function PatientRoute() {
   const { currentUser } = useAuth;
   console.log(currentUser);
-
-  return currentUser !== null && currentUser.role ? (
-    <Navigate to="/doctor" replace />
-  ) : (
-    <Patient />
-  );
+  return <Patient />;
+  // return currentUser !== null && currentUser.role ? (
+  //   <Navigate to="/doctor" replace />
+  // ) : (
+  //   <Patient />
+  // );
 }
 
 export default PatientRoute;

@@ -26,7 +26,7 @@ function AppointmentTabs() {
           label="Today's Appointments"
           visibleScrollbar={true}
         >
-          <TodayAppointmentTable />
+          {/* <TodayAppointmentTable /> */}
         </Tab>
         <Tab
           iconPosition="start"
@@ -34,7 +34,7 @@ function AppointmentTabs() {
           value="2"
           label="Upcoming Appointments"
         >
-          <UpcomingAppointmentTable />
+          {/* <UpcomingAppointmentTable /> */}
         </Tab>
       </Tabs>
       {value === "1" ? <TodayAppointmentTable /> : <UpcomingAppointmentTable />}

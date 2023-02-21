@@ -1,10 +1,5 @@
 import React from "react";
-
-import icon1 from "../../assets/icon-01.png";
-import icon2 from "../../assets/icon-02.png";
-import icon3 from "../../assets/icon-03.png";
 import { Box, Grid } from "@mui/material";
-import dayjs from "dayjs";
 import Analysis from "../../components/Graph/Analysis";
 import AppointmentTabs from "../../components/Tabs/AppointmentTabs";
 import Sidebar from "../../components/Profile/Doctor/Sidebar";

@@ -9,6 +9,7 @@ import DoctorAppointmentRecords from "./DoctorAppointmentRecords";
 import EditForm from "./EditForm";
 import PageNotFound from "../404/404";
 import MainListItems from "./MainListItems";
+import PatientDetails from "./PatientDetails";
 
 function Doctors() {
   return (
@@ -49,6 +50,16 @@ function Doctors() {
         element={
           <Dashboard
             children={<DoctorPrescription />}
+            mainListItems={<MainListItems />}
+          />
+        }
+      />
+
+      <Route
+        path="/patient-details"
+        element={
+          <Dashboard
+            children={<PatientDetails />}
             mainListItems={<MainListItems />}
           />
         }
