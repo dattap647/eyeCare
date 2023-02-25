@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Avatar,
-  Button,
   Typography,
   styled,
   TableContainer,
@@ -53,15 +52,18 @@ function TodayAppointmentTable() {
               <TableCell>{appt.purpose}</TableCell>
 
               <TableCell align="center">
-                <Button variant="outlined" color="primary" sx={{ m: 1 }}>
+                <a
+                  href="/doctor/patient-details"
+                  className="btn btn-sm bg-primary-light mx-2"
+                >
                   View
-                </Button>
-                <Button variant="outlined" color="success" sx={{ m: 1 }}>
+                </a>
+                <a href="jav" className="btn btn-sm bg-success-light mx-2">
                   Accept
-                </Button>
-                <Button variant="outlined" color="error" sx={{ m: 1 }}>
+                </a>
+                <a href="jav" className="btn btn-sm bg-danger-light mx-2">
                   Cancel
-                </Button>
+                </a>
               </TableCell>
             </TableRow>
           ))}

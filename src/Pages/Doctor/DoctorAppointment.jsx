@@ -9,7 +9,7 @@ function DoctorAppointment() {
   const useStyle = usestyle();
   return (
     <>
-      <Container style={useStyle.container} sx={{}} maxWidth="m">
+      <Container style={useStyle.container} maxWidth="m">
         <Grid container columnSpacing={2} rowSpacing={2}>
           <Grid item lg={3} md={12} sm={12}>
             <Sidebar />

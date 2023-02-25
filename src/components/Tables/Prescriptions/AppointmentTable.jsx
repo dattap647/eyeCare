@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Avatar,
-  Button,
   Typography,
   styled,
   TableContainer,
@@ -13,12 +12,11 @@ import {
   TableCell,
 } from "@mui/material";
 import appointment from "./appointmentlist";
-import { Box } from "@mui/system";
 function AppointmentTable() {
   const Cell = styled(TableCell)(({ theme }) => ({
     fontSize: "medium",
     fontWeight: "600",
-    textAlign: "center",
+    textAlign: "left",
   }));
   return (
     <TableContainer sx={{ maxHeight: 610 }} component={Paper}>
@@ -40,7 +38,7 @@ function AppointmentTable() {
         >
           {appointment.map((appt) => (
             <TableRow>
-              <TableCell align="center">
+              <TableCell>
                 <center>
                   <Avatar src={appt.imgPath} />
                 </center>
@@ -53,35 +51,13 @@ function AppointmentTable() {
               </TableCell>
               <TableCell>{appt.purpose}</TableCell>
 
-              <TableCell align="center">
-                <Box
-                  sx={{
-                    flexDirection: "column",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItem: "center",
-                  }}
+              <TableCell>
+                <a
+                  href="/doctor/patient-details"
+                  className="btn btn-sm bg-primary-light mx-2"
                 >
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    sx={{ m: 1 }}
-                    href="/doctor/patient-details"
-                  >
-                    View
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="success"
-                    sx={{ m: 1 }}
-                    href="/doctor/prescription"
-                  >
-                    Add Prescription
-                  </Button>
-                  <Button variant="outlined" color="warning" sx={{ m: 1 }}>
-                    Mark as Complete
-                  </Button>
-                </Box>
+                  View
+                </a>
               </TableCell>
             </TableRow>
           ))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Typography,
@@ -10,12 +10,24 @@ import {
   TableBody,
   TableCell,
   Box,
-  Link,
+  Button,
 } from "@mui/material";
 
 import prescriptions from "./previousPrescriptionlist";
-import CustomButton from "../../../CustomButton/CustomButton";
+
+import PrescriptionDialog from "../../../DialogBox/PrescriptionBox/PrescriptionDialog";
+
 function PreviousPrescription() {
+  const [open, setopen] = useState({
+    isOpen: false,
+  });
+  const handleNotify = (e) => {
+    setopen({
+      isOpen: true,
+    });
+    console.log("hello");
+  };
+
   const Cell = styled(TableCell)(({ theme }) => ({
     fontSize: "medium",
     fontWeight: "600",
@@ -24,13 +36,13 @@ function PreviousPrescription() {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "end", my: 2 }}>
-        <Link href="/patient/booking" underline="none">
-          <CustomButton
-            color="white"
-            backgroundColor="green"
-            buttonText="Add Prescriptions"
-          />
-        </Link>
+        {/* <CustomButton
+          
+          color="white"
+          backgroundColor="green"
+          buttonText="Add Prescriptions"
+        /> */}
+        <Button onClick={handleNotify}>Add Prescriptions</Button>
       </Box>
       <TableContainer
         sx={{ maxHeight: 340, border: "0.1px grey solid" }}
@@ -80,6 +92,7 @@ function PreviousPrescription() {
           </TableBody>
         </Table>
       </TableContainer>
+      <PrescriptionDialog open={open} setopen={setopen} />
     </>
   );
 }

@@ -12,6 +12,21 @@ function PatientDetails() {
     <Grid container columnSpacing={1} rowSpacing={1}>
       <Grid item lg={3}>
         <Sidebar />
+
+        <Box component={Paper} my={2} px={2}>
+          <Typography variant="h5" textAlign="left">
+            {" "}
+            Reports
+          </Typography>
+          <ul style={{ listStyle: "none", textAlign: "left" }}>
+            <li>
+              <a href="f">dental-test.pdf</a>
+            </li>
+            <li>
+              <a href="f">dental-test.pdf</a>
+            </li>
+          </ul>
+        </Box>
       </Grid>
       <Grid item lg={9}>
         <Appointmets />
@@ -62,9 +77,7 @@ function Appointmets() {
             value="1"
             label="Appointments"
             visibleScrollbar={true}
-          >
-            <Typography>Hello</Typography>
-          </Tab>
+          />
           <Tab
             sx={{
               px: 8,
@@ -72,7 +85,7 @@ function Appointmets() {
             iconPosition="start"
             value="2"
             label="Prescription"
-          ></Tab>
+          />
           <Tab
             sx={{
               px: 8,
@@ -80,7 +93,7 @@ function Appointmets() {
             iconPosition="start"
             value="3"
             label="Medical Records"
-          ></Tab>
+          />
         </Tabs>
       </Box>
 
