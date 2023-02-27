@@ -44,9 +44,7 @@ const signup = async (props) => {
 };
 
 const drsignup = async (props) => {
-  axios.post("", props).then((res) => {
-    console.log(res);
-  });
+return  await axios.post("http://localhost:8080/register", props)
 };
 
 const logout = () => {

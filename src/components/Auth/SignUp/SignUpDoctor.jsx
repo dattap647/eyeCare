@@ -26,11 +26,14 @@ import { Stack } from "@mui/system";
 import Navbar from "../../HomePage/Navbar/NavBar";
 import Footer from "../../HomePage/Footer/Footer";
 import axios from "axios";
+import { useAuth } from "../../../Context/Authcontext";
 
 const DrSignup = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const res="";
+  const {drsignup,setUser} = useAuth();
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -76,6 +79,7 @@ const DrSignup = () => {
     ),
   });
 
+
   const handleSubmit = async (values, props) => {
     setTimeout(() => {
       props.resetForm();
@@ -83,20 +87,48 @@ const DrSignup = () => {
     }, 2000);
     console.log("I'm submitted");
 
-    axios
-      .post("http://localhost:8080/doctor")
-      .then((res) => {
-        console.log(res);
-        console.log(loading);
-        setError("");
-        setLoading(true);
-        console.log(values);
-        navigate("/doctor/dashboard");
-      })
-      .catch((error) => {
-        console.log(error);
-        setError("User Already exist");
-      });
+   const value={
+      firstName:values.firstName,
+      lastName:values.lastName,
+      gender:values.gender,
+      phoneNumber:values.phoneNumber,
+      email:values.email,
+      role:values.role,
+      address:values.address,
+      registerNumber:values.registerNumber,
+      password:values.password,
+
+    }
+
+    try {
+      res = await drsignup(value);
+      setUser(res);
+      setError("");
+      console.log(res.data);
+      navigate("/doctor");
+    } catch (error) {
+      if (res.status === 400 || res.status === 404) {
+        setError(error.res.data.message);
+
+      } else {
+        setError("Something Went Wrong!!!");
+      }
+    }
+
+    // axios
+    //   .post("http://localhost:8080/doctor")
+    //   .then((res) => {
+    //     console.log(res);
+    //     console.log(loading);
+    //     setError("");
+    //     setLoading(true);
+    //     console.log(values);
+    //     navigate("/doctor/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setError("User Already exist");
+    //   });
   };
   const PaperContainer = styled(Paper)(({ theme }) => ({
     padding: 20,
