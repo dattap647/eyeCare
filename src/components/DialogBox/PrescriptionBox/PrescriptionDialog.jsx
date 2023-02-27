@@ -19,11 +19,14 @@ import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 
 import React, { useState } from "react";
+import EditRow from "./EditRow";
+import ReadOnlyRow from "./ReadOnlyRow";
 
 function PrescriptionDialog(props) {
   const date = dayjs();
   const formattedDate = date.format("DD MMM YYYY");
   const { open, setopen } = props;
+  const [editMedicineId, setEditMedicineId] = useState(null);
   const [prescription, setPrescription] = useState([]);
   const [addFormData, setAddFormData] = useState({
     medicineName: "",
@@ -34,11 +37,15 @@ function PrescriptionDialog(props) {
     evening: "",
     night: "",
   });
-
-  const Cell = styled(TableCell)(({ theme }) => ({
-    fontSize: "medium",
-    fontWeight: "600",
-  }));
+  const [editFormData, setEditFormData] = useState({
+    medicineName: "",
+    quantity: "",
+    days: "",
+    morning: "",
+    afternoon: "",
+    evening: "",
+    night: "",
+  });
 
   const handlereset = () => {
     setAddFormData({
@@ -60,10 +67,66 @@ function PrescriptionDialog(props) {
     setAddFormData(newFormData);
   };
 
-  const handleAddPrescription = (e) => {
+  const handleEditFormChanges = (e) => {
+    const fieldName = e.target.getAttribute("name");
+    const fieldValue = e.target.value;
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+    setEditFormData(newFormData);
+  };
+
+  const handleEditClick = (e, data) => {
+    e.preventDefault();
+    setEditMedicineId(data.id);
+    const formValues = {
+      medicineName: data.medicineName,
+      quantity: data.quantity,
+      days: data.days,
+      morning: data.morning,
+      afternoon: data.afternoon,
+      evening: data.evening,
+      night: data.night,
+    };
+    setEditFormData(formValues);
+  };
+  const handleCancelClick = () => {
+    setEditMedicineId(null);
+  };
+  const handleDeleteClick = (medicineId) => {
+    const newPrescription = [...prescription];
+    const index = prescription.findIndex(
+      (prescription) => prescription.id === medicineId
+    );
+    newPrescription.splice(index, 1);
+    setPrescription(newPrescription);
+  };
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedContact = {
+      id: editMedicineId,
+      fullName: editFormData.fullName,
+      address: editFormData.address,
+      phoneNumber: editFormData.phoneNumber,
+      email: editFormData.email,
+    };
+    const newPrescription = [...prescription];
+    //to find the id of medicine to save edit data
+    const index = prescription.findIndex(
+      (prescription) => prescription.id === editMedicineId
+    );
+
+    newPrescription[index] = editedContact;
+
+    setPrescription(newPrescription);
+    setEditMedicineId(null);
+  };
+
+  const handleAddPrescriptionForm = (e) => {
     e.preventDefault();
     const newPrescription = {
-      id: nanoid(),
+      id: nanoid(3),
       medicineName: addFormData.medicineName,
       quantity: addFormData.quantity,
       days: addFormData.days,
@@ -85,6 +148,11 @@ function PrescriptionDialog(props) {
     setPrescription([]);
   };
 
+  const Cell = styled(TableCell)(({ theme }) => ({
+    fontSize: "medium",
+    fontWeight: "600",
+  }));
+
   return (
     <Dialog
       open={open.isOpen}
@@ -105,66 +173,47 @@ function PrescriptionDialog(props) {
           </>
           <div className="biller-info">
             <h4 className="d-block">{formattedDate}</h4>
-            <span className="d-block text-sm-muted"> #ID216</span>
+            <span className="d-block text-sm-muted"> {`#ID${nanoid(3)}`}</span>
           </div>
         </Box>
 
         <Box>
           {Object(prescription).length > 0 ? (
             <Box border="1px solid black">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <Cell width="200px">Name</Cell>
-                    <Cell width="100px">Quantity</Cell>
-                    <Cell width="100px">Days</Cell>
-                    <Cell width="100px">Time</Cell>
-                    <Cell width="100px"></Cell>
-                  </TableRow>
-                </TableHead>
-                {prescription.map((d) => (
-                  <TableBody>
+              <form onSubmit={handleEditFormSubmit}>
+                <Table>
+                  <TableHead>
                     <TableRow>
-                      <TableCell>{d.medicineName}</TableCell>
-                      <TableCell>{d.quantity}</TableCell>
-                      <TableCell>{d.days}</TableCell>
-                      <TableCell align="left">
-                        <Box
-                          display="flex"
-                          justifyContent="start"
-                          alignItems="start
-                      "
-                        >
-                          {d.morning ? (
-                            <Typography marginRight={1}>Morning</Typography>
-                          ) : null}
-                          {d.afternoon ? (
-                            <Typography marginRight={1}>Afternoon</Typography>
-                          ) : null}
-                          {d.evening ? (
-                            <Typography marginRight={1}>Evening</Typography>
-                          ) : null}
-                          {d.night ? (
-                            <Typography marginRight={1}>Night</Typography>
-                          ) : null}
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <IconButton color="success">
-                          <Edit />
-                        </IconButton>
-                        <IconButton color="error">
-                          <Delete />
-                        </IconButton>
-                      </TableCell>
+                      <Cell width="200px">Name</Cell>
+                      <Cell width="100px">Quantity</Cell>
+                      <Cell width="100px">Days</Cell>
+                      <Cell width="100px">Time</Cell>
+                      <Cell width="100px"></Cell>
                     </TableRow>
-                  </TableBody>
-                ))}
-              </Table>
+                  </TableHead>
+                  {prescription.map((data) => (
+                    <TableBody>
+                      {editMedicineId === data.id ? (
+                        <EditRow
+                          editFormData={editFormData}
+                          handleEditFormChanges={handleEditFormChanges}
+                          handleCancelClick={handleCancelClick}
+                        />
+                      ) : (
+                        <ReadOnlyRow
+                          data={data}
+                          handleEditClick={handleEditClick}
+                          handleDeleteClick={handleDeleteClick}
+                        />
+                      )}
+                    </TableBody>
+                  ))}
+                </Table>
+              </form>
             </Box>
           ) : null}
           <Typography> Add Medicines</Typography>
-          <form onSubmit={handleAddPrescription}>
+          <form onSubmit={handleAddPrescriptionForm}>
             <Table>
               <TableHead>
                 <TableRow>

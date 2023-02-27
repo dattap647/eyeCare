@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import React from "react";
 import SignIn from "./components/Auth/SignIn/SignIn";
 import DrSignup from "./components/Auth/SignUp/SignUpDoctor";
 import Signup from "./components/Auth/SignUp/SignUpUser";

@@ -50,11 +50,23 @@ function SignIn() {
       if (res.status === 400 || res.status === 404) {
         setError(error.res.data.message);
       } else {
-        setError(
-          "      Something Went Wrong !!! Check Your Internet Connectivity."
-        );
+        setError("Something Went Wrong!!!");
       }
     }
+
+    // axios
+    //   .post("http://localhost:8080/login")
+    //   .then((res) => {
+    //     console.log(res);
+    //     setError("");
+    //     setLoading(true);
+    //     console.log(values);
+    //     navigate("/patient/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setError(`${error}`);
+    //   });
   };
 
   const validationSchema = Yup.object().shape({

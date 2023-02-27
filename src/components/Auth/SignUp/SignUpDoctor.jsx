@@ -46,9 +46,15 @@ const DrSignup = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().min(3, "It's too short").required("Required"),
-    lastName: Yup.string().min(3, "It's too short").required("Required"),
-    email: Yup.string().email("Enter valid email").required("Required"),
+    firstName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    email: Yup.string()
+      .email("Enter valid email")
+      .required("Required"),
     gender: Yup.string()
       .oneOf(["male", "female"], "Required")
       .required("Required"),
@@ -81,6 +87,7 @@ const DrSignup = () => {
       .post("http://localhost:8080/doctor")
       .then((res) => {
         console.log(res);
+        console.log(loading);
         setError("");
         setLoading(true);
         console.log(values);

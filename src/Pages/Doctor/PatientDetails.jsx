@@ -5,7 +5,6 @@ import Sidebar from "../../components/Profile/Patient/Sidebar";
 import MedicalRecords from "../../components/Tables/Patient/MedicalRecords/MedicalRecords";
 import PreviousAppointment from "../../components/Tables/Patient/PreviousAppointment/PreviousAppointment";
 import PreviousPrescription from "../../components/Tables/Patient/PreviousPrescription/PreviousPrescription";
-import TodayAppointmentTable from "../../components/Tables/TodaysAppointment/TodayAppointmentTable";
 
 function PatientDetails() {
   return (
@@ -29,13 +28,13 @@ function PatientDetails() {
         </Box>
       </Grid>
       <Grid item lg={9}>
-        <Appointmets />
+        <Appointments />
       </Grid>
     </Grid>
   );
 }
 
-function Appointmets() {
+function Appointments() {
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,7 +52,7 @@ function Appointmets() {
         return <MedicalRecords />;
 
       default:
-        <TodayAppointmentTable />;
+        return <PreviousAppointment />;
     }
   };
   return (
@@ -76,7 +75,6 @@ function Appointmets() {
             }}
             value="1"
             label="Appointments"
-            visibleScrollbar={true}
           />
           <Tab
             sx={{

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
+
 import Analysis from "../../components/Graph/Analysis";
 import AppointmentTabs from "../../components/Tabs/AppointmentTabs";
 import Sidebar from "../../components/Profile/Doctor/Sidebar";

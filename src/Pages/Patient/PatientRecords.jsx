@@ -22,12 +22,12 @@ function PatientRcords() {
               <tbody>
                 <tr>
                   <td>
-                    <a href="javascript">#MR-0010</a>
+                    <button>#MR-0010</button>
                   </td>
                   <td>14 Nov 2022</td>
                   <td>Dental Filling</td>
                   <td>
-                    <a href=" h">dental-test.pdf</a>
+                    <button>dental-test.pdf</button>
                   </td>
                   <td>
                     <h2 className="table-avatar">
@@ -46,12 +46,12 @@ function PatientRcords() {
                   </td>
                   <td className="text-right">
                     <div className="table-action">
-                      <a href="j" class="btn btn-sm bg-primary-light mx-2">
+                      <button class="btn btn-sm bg-primary-light mx-2">
                         <i class="fas fa-print"></i> Print
-                      </a>
-                      <a href="jav" class="btn btn-sm bg-info-light mx-2">
+                      </button>
+                      <button class="btn btn-sm bg-info-light mx-2">
                         <i class="far fa-eye"></i> View
-                      </a>
+                      </button>
                     </div>
                   </td>
                 </tr>

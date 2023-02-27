@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import usestyle from "./style";
 import Sidebar from "../../components/Profile/Doctor/Sidebar";
 

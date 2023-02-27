@@ -20,7 +20,7 @@ const login = async ({ email, password }) => {
 };
 
 const setUser = (res) => {
-  const token = res.data.token;
+  // const token = res.data.token;
 
   // if (token)
   if (true) {

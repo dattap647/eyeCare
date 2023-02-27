@@ -19,7 +19,7 @@ function UpcomingAppointmentTable() {
     textAlign: "center",
   }));
   return (
-    <TableContainer elevation={1} sx={{ maxHeight: 340 }} component={Paper}>
+    <TableContainer sx={{ maxHeight: 340 }} component={Paper}>
       <Table stickyHeader>
         <TableHead>
           <TableRow>
