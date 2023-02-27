@@ -1,8 +1,8 @@
 import { Box, Card, styled, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import Carousel from "react-material-ui-carousel";
-import serviceContent from "./carosoulContent";
 
+import serviceContent from "./carosoulContent";
+import React from "react";
 const Services = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
     width: "30%",
@@ -15,6 +15,11 @@ const Services = () => {
     display: "flex",
     justifyContent: "space-around",
     width: "70%",
+    "&:before": {
+      transition: "1.9s",
+      backgroundImage: "linear-gradient(180deg,#5c6,#02b3ff)",
+      transform: "rotate(-45deg) translate(0,-100px)",
+    },
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
     [theme.breakpoints.down("md")]: {
@@ -36,10 +41,15 @@ const Services = () => {
     padding: "10px",
     maxWidth: "381px",
     margin: "8px 8px",
-    backgroundColor: "#E6F0FF",
+    background: "#7ef",
+    "&:hover": {
+      transition: 1.9,
+      backgroundImage: "linear-gradient(180deg,#5c6,#56c)",
+    },
+
     // marginTop: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
-      margin: theme.spacing(2, 2, 2),
+      margin: theme.spacing(2),
     },
   }));
 
@@ -50,6 +60,7 @@ const Services = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#E6F0FF",
       }}
     >
       {/* //Green Line */}
@@ -105,9 +116,9 @@ const Services = () => {
                 variant="h4"
                 sx={{
                   fontFamily: "bold",
-                  fontWeight: "500",
-                  fontSize: "20px",
-                  color: "#3B3c",
+                  fontWeight: "600",
+                  fontSize: "25px",
+                  color: "black",
                   my: 1,
                 }}
               >
@@ -116,7 +127,7 @@ const Services = () => {
 
               <Typography
                 variant="body2"
-                sx={{ fontSize: "14px", color: "#5A6473", my: 2 }}
+                sx={{ fontSize: "14px", color: "black", my: 2 }}
               >
                 {step.bodyText}
               </Typography>

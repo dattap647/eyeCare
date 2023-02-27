@@ -4,10 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import DoctorDashboard from "./DoctorDashboard";
 import DoctorPrescription from "./DoctorPrescription";
 import DoctorAppointment from "./DoctorAppointment";
-import { mainListItems } from "./DoctorItemList";
+
 import DoctorAppointmentRecords from "./DoctorAppointmentRecords";
 import EditForm from "./EditForm";
 import PageNotFound from "../404/404";
+import MainListItems from "./MainListItems";
+import PatientDetails from "./PatientDetails";
 
 function Doctors() {
   return (
@@ -19,7 +21,7 @@ function Doctors() {
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorDashboard />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -29,17 +31,17 @@ function Doctors() {
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorDashboard />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
       <Route
-        path="/appointment"
+        path="/appointments"
         element={
           <Dashboard
             title="Doctor Dashboard"
             children={<DoctorAppointment />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -47,9 +49,18 @@ function Doctors() {
         path="/prescription"
         element={
           <Dashboard
-            title="Doctor Dashboard"
             children={<DoctorPrescription />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
+          />
+        }
+      />
+
+      <Route
+        path="/patient-details"
+        element={
+          <Dashboard
+            children={<PatientDetails />}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -57,9 +68,8 @@ function Doctors() {
         path="/records"
         element={
           <Dashboard
-            title="Doctor Dashboard"
             children={<DoctorAppointmentRecords />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />
@@ -67,9 +77,8 @@ function Doctors() {
         path="/edit-form"
         element={
           <Dashboard
-            title="Doctor Dashboard"
             children={<EditForm />}
-            mainListItems={mainListItems}
+            mainListItems={<MainListItems />}
           />
         }
       />

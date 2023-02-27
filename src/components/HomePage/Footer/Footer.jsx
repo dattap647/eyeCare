@@ -21,15 +21,16 @@ const Footer = () => {
 
   const IconBox = styled(Box)(({ theme }) => ({
     display: "flex",
-    alignItems: "center",
+    alignItems: "start",
     gap: "1rem",
-    justifyContent: "center",
+    justifyContent: "start",
     [theme.breakpoints.down("sm")]: {
       justifyContent: "left",
     },
   }));
 
   const FooterLink = styled(Link)(({ theme }) => ({
+    textAlign: "left",
     fontSize: "16px",
     color: "#7A7A7E",
     fontWeight: "300",
@@ -46,7 +47,7 @@ const Footer = () => {
     <Box sx={{ py: 10, bgcolor: "#E6F0FF", mt: "10px" }}>
       <CustomContainer>
         <CustomContainer>
-          <Box>
+          <Box textAlign="left">
             <Typography
               sx={{
                 fontSize: "20px",
@@ -68,7 +69,7 @@ const Footer = () => {
               Think of Eye ,Think of Eye care Clinic.
             </Typography>
 
-            <FooterLink component={Links} to="/signIn">
+            <FooterLink component={Links} to="/terms-&-conditions">
               Terms of use
             </FooterLink>
             <br />
@@ -90,7 +91,7 @@ const Footer = () => {
             </IconBox>
           </Box>
 
-          <Box>
+          <Box textAlign="left">
             <Typography
               sx={{
                 fontSize: "20px",
@@ -115,9 +116,10 @@ const Footer = () => {
             </FooterLink>
           </Box>
 
-          <Box>
+          <Box textAlign="left">
             <Typography
               sx={{
+                textAlign: "left",
                 fontSize: "20px",
                 color: "#5c6",
                 fontWeight: "700",
@@ -140,7 +142,7 @@ const Footer = () => {
             </FooterLink>
           </Box>
 
-          <Box>
+          <Box textAlign="left">
             <Typography
               sx={{
                 fontSize: "20px",

@@ -16,6 +16,7 @@ import {
   FormHelperText,
   styled,
   Alert,
+  Box,
 } from "@mui/material";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -24,6 +25,7 @@ import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import Navbar from "../../HomePage/Navbar/NavBar";
 import Footer from "../../HomePage/Footer/Footer";
+import axios from "axios";
 
 const DrSignup = () => {
   const navigate = useNavigate();
@@ -75,25 +77,26 @@ const DrSignup = () => {
   });
 
   const handleSubmit = async (values, props) => {
-    console.log("I'm xubmitted");
-
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
+    console.log("I'm submitted");
 
-    try {
-      setError("");
-      setLoading(true);
-      console.log(values);
-      // axios.post("", values).then((res) => {
-      //   console.log(res);
-      // });
-
-      // navigate("/signin");
-    } catch (error) {
-      setError("Failed to create an account");
-    }
+    axios
+      .post("http://localhost:8080/doctor")
+      .then((res) => {
+        console.log(res);
+        console.log(loading);
+        setError("");
+        setLoading(true);
+        console.log(values);
+        navigate("/doctor/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("User Already exist");
+      });
   };
   const PaperContainer = styled(Paper)(({ theme }) => ({
     padding: 20,
@@ -112,7 +115,7 @@ const DrSignup = () => {
   const marginTop = { marginTop: 5 };
 
   return (
-    <>
+    <Box backgroundColor="#E6F0FF">
       <Navbar />
       <Grid display="inline-flex">
         <PaperContainer elevation={10}>
@@ -157,7 +160,7 @@ const DrSignup = () => {
                     helperText={
                       <ErrorMessage
                         component="div"
-                        style={{ color: "red" }}
+                        style={{ color: "red", margin: "0" }}
                         name="firstName"
                       />
                     }
@@ -376,7 +379,7 @@ const DrSignup = () => {
         </PaperContainer>
       </Grid>
       <Footer />
-    </>
+    </Box>
   );
 };
 

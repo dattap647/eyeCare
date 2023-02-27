@@ -14,8 +14,8 @@ import { Box, Stack } from "@mui/system";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import doctor from "../../assets/forgotpassword.jpg";
-import CustomButton from "../CustomButtom/CustomButton";
+import doctor from "../../assets/forgotpassword.png";
+
 import Footer from "../HomePage/Footer/Footer";
 import Navbar from "../HomePage/Navbar/NavBar";
 
@@ -51,7 +51,7 @@ function ForgotPassword() {
   };
 
   const ImageBox = styled(Box)(({ theme }) => ({
-    flex: "1",
+    marginRight: "150px",
     display: "block",
 
     [theme.breakpoints.down("md")]: {
@@ -66,15 +66,10 @@ function ForgotPassword() {
     [theme.breakpoints.down("md")]: {
       height: "450px",
 
-      margin: "20px 5px 20px 5px",
+      margin: "50px 5px 20px 5px",
     },
   }));
-  const paperStyle = {
-    padding: 20,
-    height: "80vh",
-    width: 350,
-    margin: "20px auto",
-  };
+
   const textfieldStyle = {
     bordercolor: "#56c595",
     margin: "50px 0 ",
@@ -85,12 +80,12 @@ function ForgotPassword() {
   const btnstyle = { backgroundColor: "#56c596", margin: "10px 0" };
 
   return (
-    <>
+    <Box backgroundColor="#E6F0FF">
       <Navbar />
       <Grid display="inline-flex">
         <Stack direction="row">
           <ImageBox sx={{ flex: "1" }}>
-            <img src={doctor} alt="doctor" style={{ width: "50%" }} />
+            <img src={doctor} alt="doctor" style={{ width: "90%" }} />
           </ImageBox>
           <PaperContainer elevation={10}>
             <Grid align="center">
@@ -166,7 +161,7 @@ function ForgotPassword() {
         </Stack>
       </Grid>
       <Footer />
-    </>
+    </Box>
   );
 }
 

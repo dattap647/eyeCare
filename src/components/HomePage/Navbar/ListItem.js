@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export const mainListItems = (
   <div>
     <Tooltip title="Dashboard">
-      <ListItem button component={Link} to="/patient/dashboard">
+      <ListItem component={Link} to="/patient/dashboard">
         <ListItemIcon>
           <Dashboard />
         </ListItemIcon>
@@ -19,7 +19,7 @@ export const mainListItems = (
     </Tooltip>
 
     <Tooltip title="My Appointment">
-      <ListItem button component={Link} to="/patient/appointment">
+      <ListItem component={Link} to="/patient/appointment">
         <ListItemIcon>
           <EventAvailable />
         </ListItemIcon>

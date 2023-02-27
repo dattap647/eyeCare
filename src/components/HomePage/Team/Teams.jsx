@@ -2,7 +2,7 @@ import { Box, Card, styled, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import doctor from "./DoctorList";
 import Carousel from "react-material-ui-carousel";
-
+import React from "react";
 const Teams = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
     width: "30%",

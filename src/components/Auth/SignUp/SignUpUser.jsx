@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -16,6 +16,7 @@ import {
   FormHelperText,
   styled,
   Alert,
+  Box,
 } from "@mui/material";
 
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -31,7 +32,6 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  var createUser;
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -45,9 +45,15 @@ const Signup = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().min(3, "It's too short").required("Required"),
-    lastName: Yup.string().min(3, "It's too short").required("Required"),
-    email: Yup.string().email("Enter valid email").required("Required"),
+    firstName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(3, "It's too short")
+      .required("Required"),
+    email: Yup.string()
+      .email("Enter valid email")
+      .required("Required"),
     gender: Yup.string()
       .oneOf(["male", "female"], "Required")
       .required("Required"),
@@ -68,25 +74,26 @@ const Signup = () => {
   });
 
   const handleSubmit = async (values, props) => {
-    console.log("I'm xubmitted");
-
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
+    console.log("I'm submitted");
 
-    try {
-      setError("");
-      setLoading(true);
-      console.log(values);
-      // axios.post("", values).then((res) => {
-      //   console.log(res);
-      // });
-
-      // navigate("/signin");
-    } catch (error) {
-      setError("Failed to create an account");
-    }
+    axios
+      .post("http://localhost:8080/")
+      .then((res) => {
+        console.log(res);
+        console.log(loading);
+        setError("");
+        setLoading(true);
+        console.log(values);
+        navigate("/patient/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("Invalid Details");
+      });
 
     // //   useEffect(() => {
     // //     if (currentUser!== null){
@@ -113,7 +120,7 @@ const Signup = () => {
   const marginTop = { marginTop: 5 };
 
   return (
-    <>
+    <Box backgroundColor="#E6F0FF">
       <Navbar />
       <Grid display="inline-flex">
         <PaperContainer elevation={10}>
@@ -346,7 +353,7 @@ const Signup = () => {
         </PaperContainer>
       </Grid>
       <Footer />
-    </>
+    </Box>
   );
 };
 

@@ -3,16 +3,29 @@ import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container } from "@mui/system";
 import { Link as Links } from "react-router-dom";
-import { Drawer, Link, List, styled } from "@mui/material";
+import { Drawer, IconButton, Link, styled } from "@mui/material";
 import { useState } from "react";
-import { mainListItems } from "./ListItem";
-import logo from "../../../assets/logo.png";
-import CustomButton from "../../CustomButtom/CustomButton";
-import ProfileIconDropdown from "../../UpdateProfile/Profile";
 
-export const Navbar = (props) => {
-  const { isAuth } = props;
-  console.log(isAuth);
+import logo from "../../../assets/logo.png";
+import CustomButton from "../../CustomButton/CustomButton";
+import ProfileIconDropdown from "../../Profile/Patient/Profile";
+
+import Notification from "../../Notification/Notification";
+import { Notifications } from "@mui/icons-material";
+
+export const NavbarContent = ({ isAuth, sideListItems }) => {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+  const handleNotify = () => {
+    setNotify({
+      isOpen: true,
+      message: "No Notification",
+      type: "info",
+    });
+  };
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -35,7 +48,7 @@ export const Navbar = (props) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>{mainListItems}</List>
+      {sideListItems}
     </Box>
   );
 
@@ -73,7 +86,7 @@ export const Navbar = (props) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: theme.spacing(5),
+    padding: theme.spacing(3),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(2),
     },
@@ -118,10 +131,10 @@ export const Navbar = (props) => {
           <NavLink variant="body2" component={Links} to="/signIn">
             Services
           </NavLink>
-          <NavLink variant="body2" component={Links} to="/signIn">
+          <NavLink variant="body2" component={Links} to="/terms-&-conditions">
             About Us
           </NavLink>
-          <NavLink variant="body2" component={Links} to="/signIn">
+          <NavLink variant="body2" component={Links} to="/footer">
             Contact Us
           </NavLink>
         </NavbarLinksBox>
@@ -136,7 +149,12 @@ export const Navbar = (props) => {
         }}
       >
         {isAuth ? (
-          <ProfileIconDropdown />
+          <>
+            <ProfileIconDropdown />
+            <IconButton onClick={handleNotify}>
+              <Notifications />
+            </IconButton>
+          </>
         ) : (
           <>
             <NavLink variant="body2" component={Links} to="/signin">
@@ -152,8 +170,11 @@ export const Navbar = (props) => {
           </>
         )}
       </Box>
+      <Notification notify={notify} setNotify={setNotify} />
     </NavbarContainer>
   );
 };
 
-export default Navbar;
+export default function Navbar({ isAuth, sideListItems }) {
+  return <NavbarContent isAuth={isAuth} sideListItems={sideListItems} />;
+}

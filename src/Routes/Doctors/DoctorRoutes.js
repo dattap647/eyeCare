@@ -1,12 +1,13 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+
+// import { useAuth } from "../../Context/Authcontext";
 import Doctors from "../../Pages/Doctor/Doctors";
 
-export const PrivateDoctorRoute = () => {
-  //check the login details
-  const isAuthenticated = true;
+function DoctorRoutes() {
+  console.log("hello doctor");
+  //const { currentUser } = useAuth();
+  return <Doctors />;
+  // return currentUser !== null ? <SignIn /> : <Doctors />;
+}
 
-  return isAuthenticated ? <Doctors /> : <Navigate to="/" />;
-};
-
-export default PrivateDoctorRoute;
+export default DoctorRoutes;

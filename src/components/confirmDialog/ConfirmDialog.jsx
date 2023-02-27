@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Dialog,
@@ -7,32 +8,26 @@ import {
   Typography,
 } from "@mui/material";
 
-const useStyles = (theme) => ({
-  dialog: {
-    padding: 2,
-    position: "absolute",
-    top: 5,
-  },
-  dialogContent: {
-    textAlign: "center",
-  },
-  dialogTitle: {
-    textAlign: "center",
-  },
-  dialogAction: {
-    justifyContent: "space-between",
-  },
-});
-
 function ConfirmDialog(props) {
   const { confirmDialog } = props;
-  const classes = useStyles();
+
   return (
-    <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
-      <DialogTitle className={classes.dialogTitle}></DialogTitle>
+    <Dialog
+      open={confirmDialog.isOpen}
+      sx={{
+        padding: 2,
+        position: "absolute",
+        top: 5,
+      }}
+    >
+      <DialogTitle sx={{ textAlign: "center" }}>
+        <Typography variant="h5" align="center" gutterBottom>
+          {confirmDialog.title}
+        </Typography>
+      </DialogTitle>
       <DialogContent>
         <Typography variant="h6" align="center" gutterBottom>
-          {confirmDialog.title}
+          {confirmDialog.subTitle}
         </Typography>
       </DialogContent>
 
@@ -44,7 +39,16 @@ function ConfirmDialog(props) {
           fullWidth
           onClick={confirmDialog.onConfirm}
         >
-          Okay
+          Yes
+        </Button>
+        <Button
+          variant="contained"
+          size="large"
+          color="error"
+          fullWidth
+          onClick={confirmDialog.onCancel}
+        >
+          No
         </Button>
       </DialogActions>
     </Dialog>

@@ -27,6 +27,9 @@ const Specialities = () => {
   const ImageBox = styled(Box)(({ theme }) => ({
     borderRadius: "10px",
     maxWidth: 350,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
 
     backgroundColor: "#E6F0FF",
     margin: theme.spacing(0, 2, 0, 2),
@@ -49,7 +52,7 @@ const Specialities = () => {
         <SpecialitiesBox>
           {Images.map((i) => (
             <ImageBox>
-              <ImgContainer sx={{ my: 3 }}>
+              <ImgContainer sx={{ my: 2 }}>
                 <img
                   src={i.imgPath}
                   alt="ClinicalPhoto"

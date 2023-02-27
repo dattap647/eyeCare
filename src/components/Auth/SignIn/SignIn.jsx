@@ -15,8 +15,8 @@ import * as Yup from "yup";
 
 import React, { useState } from "react";
 
-import doctor from "../../../assets/login.jpg";
-import axios from "axios";
+import doctor from "../../../assets/login.png";
+
 import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 
@@ -24,43 +24,49 @@ import Navbar from "../../HomePage/Navbar/NavBar";
 import Footer from "../../HomePage/Footer/Footer";
 import { Box, Stack } from "@mui/system";
 
+import { useAuth } from "../../../Context/Authcontext";
 function SignIn() {
   const navigate = useNavigate();
+  const { login, setUser } = useAuth();
   const initialValues = {
     email: "",
     password: "",
   };
-
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const handleSubmit = (values, props) => {
-    console.log("I'm xubmitted");
-
+  const handleSubmit = async (values, props) => {
+    let res = "";
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
     }, 2000);
+    console.log("I'm submitted");
 
     try {
+      res = await login(values);
+      setUser(res);
       setError("");
-      setLoading(true);
-      console.log(values);
-      // axios.post("", values).then((res) => {
-      //   console.log(res);
-      // });
-
-      // navigate("/signin");
+      navigate("/patient");
     } catch (error) {
-      setError("Failed to create an account");
+      if (res.status === 400 || res.status === 404) {
+        setError(error.res.data.message);
+      } else {
+        setError("Something Went Wrong!!!");
+      }
     }
 
-    // //   useEffect(() => {
-    // //     if (currentUser!== null){
-
-    // //     }
-
-    // //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // // }, [currentUser])
+    // axios
+    //   .post("http://localhost:8080/login")
+    //   .then((res) => {
+    //     console.log(res);
+    //     setError("");
+    //     setLoading(true);
+    //     console.log(values);
+    //     navigate("/patient/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setError(`${error}`);
+    //   });
   };
 
   const validationSchema = Yup.object().shape({
@@ -77,7 +83,7 @@ function SignIn() {
     color: "#56c595",
   };
   const ImageBox = styled(Box)(({ theme }) => ({
-    flex: "1",
+    marginRight: "150px",
     display: "block",
 
     [theme.breakpoints.down("md")]: {
@@ -92,7 +98,7 @@ function SignIn() {
     [theme.breakpoints.down("md")]: {
       height: "450px",
 
-      margin: "20px 5px 20px 5px",
+      margin: "50px 5px 20px 5px",
     },
   }));
   const avatarStyle = { backgroundColor: "#5c6" };
@@ -107,12 +113,12 @@ function SignIn() {
   };
 
   return (
-    <>
+    <Box backgroundColor="#E6F0FF">
       <Navbar />
       <Grid display="inline-flex">
         <Stack direction="row">
-          <ImageBox sx={{ flex: "1" }}>
-            <img src={doctor} alt="doctor" style={{ width: "50%" }} />
+          <ImageBox>
+            <img src={doctor} alt="doctor" style={{ width: "90%" }} />
           </ImageBox>
           <PaperContainer elevation={10}>
             <Grid align="center">
@@ -200,7 +206,7 @@ function SignIn() {
         </Stack>
       </Grid>
       <Footer />
-    </>
+    </Box>
   );
 }
 

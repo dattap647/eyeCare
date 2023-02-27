@@ -6,36 +6,51 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
+const login = async ({ email, password }) => {
+  return await axios.get("https://reqres.in/api/users/2", {
+    email,
+    password,
+  });
+
+  // const token = res.data.token;
+  // if (token) {
+  //   localStorage.setItem("user", JSON.stringify(res.data));
+  // }
+  // return res.data;
+};
+
+const setUser = (res) => {
+  // const token = res.data.token;
+
+  // if (token)
+  if (true) {
+    localStorage.setItem("user", JSON.stringify(res.data));
+  }
+  return res.data;
+};
+
+const isAuthenticated = () => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    return {};
+  }
+  return JSON.parse(user);
+};
+
 const signup = async (props) => {
   return axios.post("", props).then((res) => {
     console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
   });
 };
 
 const drsignup = async (props) => {
   axios.post("", props).then((res) => {
     console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
-  });
-};
-
-const login = (email, password) => {
-  axios.post("", { email, password }).then((res) => {
-    console.log(res);
-    // return updateProfile(res.user, {
-    //     displayName: `${firstName} ${lastName}`,
-    // })
   });
 };
 
 const logout = () => {
-  //logout function
-  return;
+  localStorage.removeItem("user");
 };
 
 const resetPassword = (email) => {
@@ -57,6 +72,8 @@ export default function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
+    isAuthenticated,
+    setUser,
     signup,
     logout,
     resetPassword,
@@ -65,14 +82,19 @@ export default function AuthProvider({ children }) {
     drsignup,
   };
 
-  //   useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //       setCurrentUser(user);
-  //       setLoading(false);
-  //     });
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let cuser = isAuthenticated();
+      if (cuser === null) {
+        localStorage.removeItem("user");
+        cuser = "";
+      }
 
-  //     return unsubscribe;
-  //   }, []);
+      setCurrentUser(cuser);
+      setLoading(false);
+    };
+    checkLoggedIn();
+  }, []);
 
   return (
     <AuthContext.Provider value={value}>
